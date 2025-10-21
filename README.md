@@ -1,4 +1,3 @@
-# PBL_Project_Based_Learning
 
 # PBL_Project_Based_Learning
 
@@ -6,219 +5,207 @@ Este repositório documenta o projeto final colaborativo **"PBL - Project-Based 
 
 Aqui serão registados todos os passos do desenvolvimento do projeto, desde o enunciado e explicações iniciais até à definição da rede, configurações técnicas implementadas e as soluções de segurança adotadas. O repositório tem como objetivo proporcionar uma visão detalhada do processo, com foco na construção de uma infraestrutura de rede segura, eficiente e alinhada aos requisitos técnicos especificados no PDF fornecido.
 
+---
 
 # Enunciado do Projeto 
 
+[PBL_Enunciado](./PBL_Enunciado) 
+
+---
+
+# Desenvolvimento
+
+## 1. Topologia física e lógica 
+
+<details>
+  <summary><strong>1.1.1 DATACENTER</strong></summary>
+
+  ### Serviços Internos
+
+   - **Servidor DHCP para todas as redes**
+   - **Servidor do website institucional (HTTP)**
+   - **Servidor FTP para Departamento de Serviços de Informática**
+   - **Servidor HTTP para Professores e Departamento de Serviços Académicos**
+  
+  ### WAN
+
+  - **Internet**
+
+</details>
 
 
-## 1. Introduction
-- Trabalho laboratorial comum às disciplinas de:
-    - Comunicação de Dados e Redes II
-    - Segurança de Redes e Sistemas
-- Trabalho a realizar em grupos de até três elementos, em ambiente GNS3.
-- Data de apresentação:
-    - Turma A: 17/06/2024
-    - Turma B: 23/06/2024
-- Entregáveis: Apresentação + projeto GNS3.
+<details>
+  <summary><strong>1.1.2 EDIFÍCIO A</strong></summary>
 
-## 2. Contextualização
-A Figura 1 representa as várias áreas tecnológicas existentes no campus da Universidade da Maia.
+  ### BASTIDOR 1
 
-<img width="825" height="567" alt="image" src="https://github.com/user-attachments/assets/ca43599c-cf4a-4eb5-803c-75c76feba472" />
+  **Geral do edifício**
+   - 8 Impressoras
+   - 4 Telefones
+   - 1 PC para convidados
+
+  **Sala do Departamento de Serviços de Informática**
+   - 5 PCs (serviços de informática)
+   - 5 Telefones
+
+  **Sala A1**
+   - 2 PCs para professor
+   - 2 Telefones
+   - 50 PCs para alunos
+
+  ### BASTIDOR 2
+
+  **Sala A2**
+   - 2 PCs para professor
+   - 2 Telefones
+   - 15 PCs para alunos
+
+  **Sala A3**
+   - 2 PCs para professor
+   - 2 Telefones
+   - 15 PCs para alunos
+</details>
+
+<details>
+  <summary><strong>1.1.3 EDIFÍCIO B</strong></summary>
+
+  ### BASTIDOR 1
+
+  **Laboratório de Informática**
+   - 120 PCs para alunos
+   - 2 PCs para professores
+   - 1 Telefone
+
+  **Auditório**
+   - 2 PCs para professor
+   - 1 Telefone
+
+  ### BASTIDOR 2
+
+  **Geral do edifício**
+   - 7 Impressoras
+   - 4 Telefones
+   - 1 PC para convidados
+
+  **Sala do Departamento de Serviços Financeiros**
+   - 10 PCs (serviços financeiros)
+   - 5 Telefones
+
+  **Sala do Departamento de Serviços Académicos**
+   - 16 PCs (serviços académicos)
+   - 10 Telefones
+
+  **Sala de Professores**
+   - 25 PCs para professores
+   - 4 PCs para convidados
+   - 3 Telefones
+
+  **Laboratório de Informática**
+   - 120 PCs para alunos
+   - 2 PCs para professores
+   - 1 Telefone
+
+  **Sala de Aulas B1**
+   - 2 PCs para professor
+   - 1 Telefone
+   - 35 PCs para alunos
+</details>
 
 
-Do ponto de vista dos utilizadores da Universidade, é possível identificar 9 segmentos:
-1. Alunos
-2. Professores
-3. Departamento de Serviços Financeiros
-4. Departamento de Serviços Académicos
-5. Departamento de Serviços de Informática
-6. Convidados
-7. Telefones
-8. Impressoras
-9. Gestão dos equipamentos de rede
+# 2. Endereçamento IPv4 
 
-Como principal objetivo deste trabalho, propõe-se o desenho e implementação de uma arquitetura de rede e serviços de acordo com os requisitos apresentados neste documento.
+## SWITCHES
 
-## 3. Requisitos
+<details>
+  <summary><strong>SWITCHES – EDIFÍCIO A</strong></summary>
 
-### 3.1 Datacenter
-O Datacenter é composto por dois âmbitos distintos: a sua rede local, que hospeda os serviços internos da Universidade, e a WAN que suporta a conectividade com o fornecedor de serviços responsável pela interligação à Internet. 
+  | **Batidor** | **Switch** | **VLAN** | **Endereço IP**     | **Máscara**         | **Gateway**         |
+  |-------------|------------|----------|---------------------|---------------------|---------------------|
+  | 1           | BA1-S1     | 90       | 192.168.90.11       | 255.255.255.224     | 192.168.90.1       |
+  | 1           | BA1-S2     | 90       | 192.168.90.12       | 255.255.255.224     | 192.168.90.1       |
+  | 1           | BA1-S3     | 90       | 192.168.90.13       | 255.255.255.224     | 192.168.90.1       |
+  | 1           | BA1-S4     | 90       | 192.168.90.14       | 255.255.255.224     | 192.168.90.1       |
+  | 2           | BA2-S5     | 90       | 192.168.90.21       | 255.255.255.224     | 192.168.90.1       |
+  | 2           | BA2-S6     | 90       | 192.168.90.22       | 255.255.255.224     | 192.168.90.1       |
+</details>
 
-Os servidores deverão estar todos na mesma rede e o seu endereçamento deverá ser atribuído manualmente. O switch de Datacenter, os routers (Datacenter, Central e ISP) e os servidores deverão estar alojados no Bastidor de Datacenter (BD1).
+<details>
+  <summary><strong>SWITCHES – EDIFÍCIO B</strong></summary>
 
-#### 3.1.1 Necessidades de Layer 2 e Layer 3
-- **Serviços Internos**
-    - Servidor DHCP para todas as redes
-    - Servidor do website institucional (HTTP)
-    - Servidor FTP para Departamento de Serviços de Informática
-    - Servidor HTTP para Professores e Departamento de Serviços Académicos
-- **WAN**
-    - Internet
+  | **Batidor** | **Switch** | **VLAN** | **Endereço IP**     | **Máscara**         | **Gateway**         |
+  |-------------|------------|----------|---------------------|---------------------|---------------------|
+  | 1           | BB1-S1     | 91       | 192.168.91.11       | 255.255.255.224     | 192.168.91.1       |
+  | 1           | BB1-S2     | 91       | 192.168.91.12       | 255.255.255.224     | 192.168.91.1       |
+  | 1           | BB1-S3     | 91       | 192.168.91.13       | 255.255.255.224     | 192.168.91.1       |
+  | 1           | BB1-S4     | 91       | 192.168.91.14       | 255.255.255.224     | 192.168.91.1       |
+  | 1           | BB1-S5     | 91       | 192.168.91.15       | 255.255.255.224     | 192.168.91.1       |
+  | 1           | BB1-S6     | 91       | 192.168.91.16       | 255.255.255.224     | 192.168.91.1       |
+  | 2           | BB2-S1     | 91       | 192.168.91.21       | 255.255.255.224     | 192.168.91.1       |
+  | 2           | BB2-S2     | 91       | 192.168.91.22       | 255.255.255.224     | 192.168.91.1       |
+  | 2           | BB2-S3     | 91       | 192.168.91.23       | 255.255.255.224     | 192.168.91.1       |
+  | 2           | BB2-S4     | 91       | 192.168.91.24       | 255.255.255.224     | 192.168.91.1       |
+  | 2           | BB2-S5     | 91       | 192.168.91.25       | 255.255.255.224     | 192.168.91.1       |
+  | 2           | BB2-S6     | 91       | 192.168.91.26       | 255.255.255.224     | 192.168.91.1       |
+  | 2           | BB2-S7     | 91       | 192.168.91.27       | 255.255.255.224     | 192.168.91.1       |
+</details>
 
-### 3.2 Edifício A
-O Edifício A da Universidade é composto por 3 salas de aula e a sala do Departamento de Serviços de Informática. Este edifício dispõe de duas zonas técnicas com bastidores.
+<details>
+  <summary><strong>SWITCHES – DATACENTER</strong></summary>
 
-Um dos bastidores (BA1) aloja os switches necessários para a ligação dos equipamentos terminais gerais do edifício, da sala de aulas A1 e do Departamento de Serviços de Informática. O router do Edifício A deve estar instalado neste bastidor.
+  | **Switch**           | **VLAN** | **Endereço IP**     | **Máscara**         | **Gateway**         |
+  |----------------------|----------|---------------------|---------------------|---------------------|
+  | LAN-DATACENTER       | 92       | 192.168.92.2        | 255.255.255.224     | 192.168.92.1       |
+</details>
 
-O outro bastidor (BA2), deverá alojar os switches responsáveis pelas ligações de rede das salas de aulas A2 e A3.
+## ROUTERS
 
-#### 3.2.1 Necessidades de Layer 2 e Layer 3
-- **Geral do edifício**
-    - 8 Impressoras
-    - 4 Telefones
-    - 1 PC para convidados
-- **Sala do Departamento de Serviços de Informática**
-    - 5 PCs (serviços de informática)
-    - 5 Telefones
-- **Salas de Aula**
-    - **Sala A1**
-        - 2 PC para professor
-        - 2 Telefone
-        - 50 PCs para alunos
-    - **Sala A2**
-        - 2 PC para professor
-        - 2 Telefone
-        - 15 PCs para alunos
-    - **Sala A3**
-        - 2 PC para professor
-        - 2 Telefone
-        - 15 PCs para alunos
+<details>
+  <summary><strong>ROUTERS</strong></summary>
 
-### 3.3 Edifício B
-O Edifício B da Universidade é composto por 1 auditório, 2 salas de departamentos, 1 sala de professores, um laboratório de informática e uma sala de aulas. Este edifício dispõe de duas zonas técnicas onde se encontram instalados os bastidores.
+  | **Router**          | **Interface** | **Endereço IP** |
+  |---------------------|---------------|-----------------|
+  | **ROUTER CENTRAL**  | e0/0          | 10.0.1.2        |
+  |                     | e0/1          | 10.0.2.2        |
+  |                     | e0/2          | 10.0.3.2        |
+  |                     | e0/3          | 10.0.4.2        |
+  | **ROUTER A**        | e0/1          | 10.0.1.1        |
+  | **ROUTER B**        | e0/0          | 10.0.2.1        |
+  | **ROUTER DATABASE** | e0/0          | 10.0.3.1        |
+  |                     | e0/1.92       | 192.168.92.1    |
+  |                     | e0/1.93       | 192.168.93.1    |
+  | **ROUTER ISP**      | e0/0          | 10.0.4.1        |
+  |                     | e0/1          | 192.168.94.1    |
+</details>
 
-Um dos bastidores (BB1) deverá alojar os equipamentos do laboratório de informática e do auditório.
+## VLANs
 
-O outro bastidor (BB2) é responsável pela ligação dos equipamentos terminais dos restantes espaços.
+<details>
+  <summary><strong>VLANs</strong></summary>
 
-#### 3.3.1 Necessidades de Layer 2 e Layer 3
-- **Geral do edifício**
-    - 7 Impressoras
-    - 4 Telefones
-    - 1 PC para convidados
-- **Auditório**
-    - 2 PC para professor
-    - 1 Telefone
-- **Sala do Departamento de Serviços Financeiros**
-    - 10 PCs (serviços financeiros)
-    - 5 Telefones
-- **Sala do Departamento de Serviços Académicos**
-    - 16 PCs (serviços académicos)
-    - 10 Telefones
-- **Sala de Professores**
-    - 25 PCs para professores
-    - 4 PC para convidados
-    - 3 Telefones
-- **Laboratório de Informática**
-    - 120 PCs para alunos
-    - 2 PCs para professores
-    - 1 Telefone
-- **Sala de Aulas B1**
-    - 2 PCs para professor
-    - 1 Telefone
-    - 35 PCs para alunos
-
-### 3.4 Endereçamento IP e Conetividade
-Cada edifício deverá contemplar uma rede IPv4 por cada um dos segmentos. O endereçamento IPv4 deverá ser criado de acordo com o número de equipamentos necessários por cada um dos segmentos, promovendo-se a utilização de máscaras de rede adaptadas às necessidades.
-
-Relativamente aos requisitos de conectividade, considera-se que deverá existir conectividade IP entre todos os segmentos da topologia.
-
-### 3.5 Controlo de acessos
-Relativamente aos requisitos de controlo de acessos entre cada um dos segmentos, considera-se que as seguintes políticas deverão ser implementadas:
-
-- **Alunos**
-    - Acesso inter-edifícios
-    - Acesso à Internet
-    - Acesso a serviços internos (dhcp e website institucional)
-    - Acesso a impressoras do edifício
-- **Professores**
-    - Acesso inter-edifícios
-    - Acesso à Internet
-    - Serviços internos (dhcp, website institucional e servidor web)
-    - Acesso a impressoras do edifício
-- **Departamento de Serviços Financeiros**
-    - Acesso à Internet
-    - Serviços internos (dhcp, website institucional)
-    - Acesso a impressoras do edifício
-- **Departamento de Serviços Académicos**
-    - Acesso à Internet
-    - Serviços internos (dhcp, website institucional e servidor web)
-    - Acesso a impressoras do edifício
-- **Departamento de Serviços de Informática**
-    - Acesso a todas as redes
-    - Acesso à Internet
-    - Acesso a todos os serviços internos
-    - Acesso a impressoras do edifício
-- **Convidados**
-    - Apenas acesso à Internet
-- **Telefones**
-    - Acesso inter-edifício
-    - Serviços internos (dhcp)
-- **Impressoras**
-    - Serviços internos (dhcp)
-- **Gestão dos equipamentos de rede**
-    - Acesso inter-edifício
-    - Serviços internos (dhcp)
-
-Deverá ser possível aceder ao website institucional a partir da Internet. Todos os fluxos de tráfego não identificados não deverão ser permitidos.
-
-## 4. Objetivos de implementação
-
-### Implementação Essencial (IE)
-- Topologia física e lógica
-- Endereçamento IPv4
-- VLANs + Convidados = Native VLAN
-- Routing estático
-- Router on-a-stick (Edifício A)
-- Legacy Inter-VLAN Routing (Edifício B)
-- Servidor DHCP (Router Datacenter)
-- Redundância de L2 (STP)
-- Rede dedicada à gestão dos equipamentos
-- Políticas de controlo de acesso
-- Segurança VLANs
-- Servidor HTTP e FTP
-- Implementação de Port Security
-- Segurança STP
-
-### Implementação Avançada (IA)
-- LACP
-- Redundância de L3 (routing edifícios <-> DC)
-- NAT/PAT
-- Private VLAN
-
-## 5. Avaliação
-
-### 5.1 Checkpoints
-**Turma A:**
-- Semana 26/05 a 30/05: Planeamento (VLANs, Endereçamento IPv4, Topologia física e lógica)
-- Semana 02/06 a 06/06: Implementação Essencial (IE)
-- Semana 09/06 a 13/06: Implementação Avançada (IA)
-- Semana 16/06 a 20/06: Apresentação e entrega do trabalho
-
-**Turma B:**
-- Semana 26/05 a 30/05: Planeamento (VLANs, Endereçamento IPv4, Topologia física e lógica)
-- Semana 02/06 a 06/06: Planeamento + Implementação Essencial (IE)
-- Semana 09/06 a 13/06: IE + Implementação Avançada (IA)
-- Semana 16/06 a 20/06: IA
-- Dia 23/06: Apresentação e entrega do trabalho
-
-### 5.2 Critérios
-- Implementação*50% + Checkpoints*20% + Defesa*30%
-- Implementação = IE <= 16 | IA <=20
-- Checkpoints: Evolução da implementação
-- Defesa: Apresentação (20 min.) + Arguição (20 min.)
-You can use this markdown for a clear and organized format of your project document!
-
-Is this conversation helpful so far?
+  | **VLAN ID** | **Nome VLAN**            | **Segmento**         | **Local**       | **Nº Hosts** | **Nº Hosts Reais** | **CIDR** | **Sub-rede**         | **Gateway**        | **Máscara**         | **IPs utilizáveis** |
+  |-------------|--------------------------|----------------------|-----------------|--------------|--------------------|----------|----------------------|--------------------|---------------------|---------------------|
+  | 10          | VLAN_ALUNOS_A            | Alunos               | Edifício A      | 80           | 83                 | /25      | 192.168.10.0/25      | 192.168.10.1      | 255.255.255.128     | .2 – .126           |
+  | 11          | VLAN_ALUNOS_B            | Alunos               | Edifício B      | 155          | 158                | /24      | 192.168.11.0/24      | 192.168.11.1      | 255.255.255.0       | .2 – .254           |
+  | 20          | VLAN_PROFESSORES_A       | Professores          | Edifício A      | 6            | 9                  | /28      | 192.168.20.0/28      | 192.168.20.1      | 255.255.255.240     | .2 – .14            |
+  | 21          | VLAN_PROFESSORES_B       | Professores          | Edifício B      | 31           | 34                 | /26      | 192.168.21.0/26      | 192.168.21.1      | 255.255.255.192     | .2 – .62            |
+  | 30          | VLAN_SERV_FINANCEIROS    | Serviços Financeiros | Edifício B      | 10           | 13                 | /28      | 192.168.30.0/28      | 192.168.30.1      | 255.255.255.240     | .2 – .14            |
+  | 40          | VLAN_SERV_ACADEMICOS     | Serviços Académicos  | Edifício B      | 16           | 19                 | /27      | 192.168.40.0/27      | 192.168.40.1      | 255.255.255.224     | .2 – .30            |
+  | 50          | VLAN_SINFO               | Serviços Informática | Edifício A      | 5            | 8                  | /28      | 192.168.50.0/28      | 192.168.50.1      | 255.255.255.240     | .2 – .14            |
+  | 60          | VLAN_CONVIDADOS_A        | Convidados           | Edifício A      | 1            | 4                  | /29      | 192.168.60.0/29      | 192.168.60.1      | 255.255.255.248     | .2 – .6             |
+  | 61          | VLAN_CONVIDADOS_B        | Convidados           | Edifício B      | 5            | 8                  | /28      | 192.168.61.0/28      | 192.168.61.1      | 255.255.255.240     | .2 – .14            |
+  | 70          | VLAN_TELEFONES_A         | Telefones            | Edifício A      | 15           | 18                 | /27      | 192.168.70.0/27      | 192.168.70.1      | 255.255.255.224     | .2 – .30            |
+  | 71          | VLAN_TELEFONES_B         | Telefones            | Edifício B      | 25           | 28                 | /27      | 192.168.71.0/27      | 192.168.71.1      | 255.255.255.224     | .2 – .30            |
+  | 80          | VLAN_IMPRESSORAS_A       | Impressoras          | Edifício A      | 8            | 11                 | /28      | 192.168.80.0/28      | 192.168.80.1      | 255.255.255.240     | .2 – .14            |
+  | 81          | VLAN_IMPRESSORAS_B       | Impressoras          | Edifício B      | 7            | 10                 | /28      | 192.168.81.0/28      | 192.168.81.1      | 255.255.255.240     | .2 – .14            |
+  | 90          | VLAN_GESTAO_REDE_A       | Gestão equipamentos  | Edifício A      | 5            | 8                  | /27      | 192.168.90.0/27      | 192.168.90.1      | 255.255.255.224     | .2 – .30            |
+  | 91          | VLAN_GESTAO_REDE_B       | Gestão equipamentos  | Edifício B      | 5            | 8                  | /27      | 192.168.91.0/27      | 192.168.91.1      | 255.255.255.224     | .2 – .30            |
+  | 92          | VLAN_GESTAO_REDE_DATASET | Gestão equipamentos  | Datacenter      | 5            | 8                  | /27      | 192.168.92.0/27      | 192.168.92.1      | 255.255.255.224     | .2 – .30            |
+  | 93          | DATACENTER               | Datacenter           | Datacenter      | 29           | 29                 | /27      | 192.168.93.0/27      | 192.168.93.1      | 255.255.255.224     | .2 – .30            |
+  | 94          | ISP                      | ISP                  | Datacenter      | 29           | 29                 | /29      | 192.168.94.0/29      | 192.168.94.1      | 255.255.255.248     | .2 – .6             |
+</details>
 
 
 
 
-Foi detetada atividade suspeita
-Parece que outra pessoa pode estar a usar a sua conta do ChatGPT. Garanta a segurança da sua conta para voltar a ter acesso a todas as funcionalidades. Saber mais.
 
 
-
-Nenhum ficheiro selecionadoNenhum ficheiro selecionado
-O ChatGPT pode cometer erros. Considere verificar informações importantes. Consulte as Preferências de cookies.
