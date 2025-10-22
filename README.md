@@ -435,7 +435,7 @@ exit
 </details> 
 
 
-## 3.2 ACCESS PORTS
+## 3.3 ACCESS PORTS
 
 Feito em Todas as Portas que ligam aos Equipamnetos Terminais e No Swictch LAN-Datacenter nas ligações aos servidores
 
@@ -452,7 +452,7 @@ exit
 ```
 </details> 
 
-## 3.3 PORTS PARKING (VLAN_PARKING_LOT)
+## 3.4 PORTS PARKING (VLAN_PARKING_LOT)
 
 Feito em Todas as Portas do Switch Inutilizadas (Adaptado ao Range necessário em cada Switch!)
 
@@ -556,7 +556,7 @@ exit
 </details>
 
 
-# 5. Router on-a-stick - Edifício A (Router Datacenter)
+# 5. Router On-a-Stick - Edifício A 
 
 <details> 
   <summary><strong>ROUTER A</strong></summary>
@@ -635,5 +635,394 @@ interface Ethernet0/1.92
 
 </details>
 
+
+# 6. Legacy Inter-VLAN Routing 
+
+<details> 
+  <summary><strong>ROUTER B</strong></summary>
+
+```
+interface Ethernet0/3
+ ip address 192.168.11.1 255.255.255.0
+ no shutdown
+
+interface Ethernet1/0
+ ip address 192.168.21.1 255.255.255.192
+ no shutdown
+
+interface Ethernet1/1
+ ip address 192.168.30.1 255.255.255.240
+ no shutdown
+
+interface Ethernet1/2
+ ip address 192.168.40.1 255.255.255.224
+ no shutdown
+
+interface Ethernet1/3
+ ip address 192.168.61.1 255.255.255.248
+ no shutdown
+
+interface Ethernet2/0
+ ip address 192.168.71.1 255.255.255.224
+ no shutdown
+
+interface Ethernet2/1
+ ip address 192.168.81.1 255.255.255.248
+ no shutdown
+
+interface Ethernet2/2
+ ip address 192.168.91.1 255.255.255.224
+ no shutdown
+````
+
+</details> 
+
+<details> 
+  <summary><strong>SWITCH BB2-S6 </strong></summary>
+
+```
+interface Ethernet0/3
+ switchport mode access
+ switchport access vlan 11
+exit
+interface Ethernet1/0
+ switchport mode access
+ switchport access vlan 21
+exit
+interface Ethernet1/1
+ switchport mode access
+ switchport access vlan 30
+exit
+interface Ethernet1/2
+ switchport mode access
+ switchport access vlan 40
+exit
+interface Ethernet1/3
+ switchport mode access
+ switchport access vlan 61
+exit
+interface Ethernet2/0
+ switchport mode access
+ switchport access vlan 71
+exit
+interface Ethernet2/1
+ switchport mode access
+ switchport access vlan 81
+exit
+interface Ethernet2/2
+ switchport mode access
+ switchport access vlan 91
+exit
+
+interface vlan 91
+ ip address 192.168.91.26 255.255.255.224
+ no shutdown
+exit
+
+ip default-gateway 192.168.91.1
+
+end
+```
+
+</details> 
+
+
+# 7. Servidor DHCP (Router Datacenter) 
+
+
+<details> 
+  <summary><strong>ROUTER DATABASE</strong></summary>
+  
+```
+conf t
+ip dhcp excluded-address 10.0.1.1 10.0.1.2
+ip dhcp excluded-address 10.0.2.1 10.0.2.2
+ip dhcp excluded-address 10.0.3.1 10.0.3.2
+ip dhcp excluded-address 10.0.4.1 10.0.4.2
+
+ip dhcp excluded-address 192.168.10.1
+ip dhcp excluded-address 192.168.11.1
+ip dhcp excluded-address 192.168.20.1
+ip dhcp excluded-address 192.168.21.1
+ip dhcp excluded-address 192.168.30.1
+ip dhcp excluded-address 192.168.40.1
+ip dhcp excluded-address 192.168.50.1
+ip dhcp excluded-address 192.168.60.1
+ip dhcp excluded-address 192.168.61.1
+ip dhcp excluded-address 192.168.70.1
+ip dhcp excluded-address 192.168.71.1
+ip dhcp excluded-address 192.168.80.1
+ip dhcp excluded-address 192.168.81.1
+ip dhcp excluded-address 192.168.90.1
+ip dhcp excluded-address 192.168.90.11 192.168.90.14
+ip dhcp excluded-address 192.168.90.21 192.168.90.22
+ip dhcp excluded-address 192.168.91.1
+ip dhcp excluded-address 192.168.91.11 192.168.91.16
+ip dhcp excluded-address 192.168.91.21 192.168.91.26
+ip dhcp excluded-address 192.168.92.1
+exit
+```
+```
+conf t
+
+ip dhcp pool POOL_ALUNOS_A
+ network 192.168.10.0 255.255.255.128
+ default-router 192.168.10.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_ALUNOS_B
+ network 192.168.11.0 255.255.255.0
+ default-router 192.168.11.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_PROF_A
+ network 192.168.20.0 255.255.255.240
+ default-router 192.168.20.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_PROF_B
+ network 192.168.21.0 255.255.255.192
+ default-router 192.168.21.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_FIN
+ network 192.168.30.0 255.255.255.240
+ default-router 192.168.30.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_ACA
+ network 192.168.40.0 255.255.255.224
+ default-router 192.168.40.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_SINFO
+ network 192.168.50.0 255.255.255.240
+ default-router 192.168.50.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_CONV_A
+ network 192.168.60.0 255.255.255.248
+ default-router 192.168.60.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_CONV_B
+ network 192.168.61.0 255.255.255.240
+ default-router 192.168.61.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_TEL_A
+ network 192.168.70.0 255.255.255.224
+ default-router 192.168.70.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_TEL_B
+ network 192.168.71.0 255.255.255.224
+ default-router 192.168.71.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_IMP_A
+ network 192.168.80.0 255.255.255.240
+ default-router 192.168.80.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_IMP_B
+ network 192.168.81.0 255.255.255.240
+ default-router 192.168.81.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_GEST_A
+ network 192.168.90.0 255.255.255.224
+ default-router 192.168.90.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_GEST_B
+ network 192.168.91.0 255.255.255.224
+ default-router 192.168.91.1
+ dns-server 8.8.8.8
+
+ip dhcp pool POOL_GEST_DATA
+ network 192.168.92.0 255.255.255.224
+ default-router 192.168.92.1
+ dns-server 8.8.8.8
+
+exit
+```
+
+</details> 
+
+
+<details> 
+  <summary><strong>ROUTER A (Relay)</strong></summary>
+
+```
+conf t
+
+interface e0/0.10
+ ip helper-address 10.0.3.1
+exit
+
+interface e0/0.20
+ ip helper-address 10.0.3.1
+exit
+
+interface e0/0.50
+ ip helper-address 10.0.3.1
+exit
+
+interface e0/0.60
+ ip helper-address 10.0.3.1
+exit
+
+interface e0/0.70
+ ip helper-address 10.0.3.1
+exit
+
+interface e0/0.80
+ ip helper-address 10.0.3.1
+exit
+
+interface e0/0.90
+ ip helper-address 10.0.3.1
+exit
+
+write memory
+```
+
+</details> 
+
+<details> 
+  <summary><strong>ROUTER B (Relay)</strong></summary>
+
+ ```
+conf t
+interface range e0/3 e1/0 - 3 e2/0 - 2
+ ip helper-address 10.0.3.1
+exit
+```
+
+</details> 
+
+
+# 8. Redundância de L2 (Spanning Tree Protocol) 
+
+## 8.2 EDIFICIO A 
+
+<details> 
+  <summary><strong>TODOS OS SWITCHES</strong></summary>
+  
+```
+configure terminal
+spanning-tree vlan 10
+spanning-tree vlan 20
+spanning-tree vlan 50
+spanning-tree vlan 60
+spanning-tree vlan 70
+spanning-tree vlan 80
+spanning-tree vlan 91
+exit
+```
+</details> 
+
+<details> 
+  <summary><strong>BA1-S1 (ROOT BRIDGE)</strong></summary>
+
+```
+configure terminal
+spanning-tree vlan 10 root primary
+spanning-tree vlan 20 root primary
+spanning-tree vlan 50 root primary
+spanning-tree vlan 60 root primary
+spanning-tree vlan 70 root primary
+spanning-tree vlan 80 root primary
+spanning-tree vlan 90 root primary
+exit
+```
+</details> 
+
+<details> 
+  <summary><strong>BA1-S3 (ROOT SECONDARY)</strong></summary>
+
+```
+configure terminal
+spanning-tree vlan 10 root secondary
+spanning-tree vlan 20 root secondary
+spanning-tree vlan 50 root secondary
+spanning-tree vlan 60 root secondary
+spanning-tree vlan 70 root secondary
+spanning-tree vlan 80 root secondary
+spanning-tree vlan 90 root secondary
+exit
+```
+</details> 
+
+<details> 
+  <summary><strong>BA1-S2, BA1-S4, BA2-S1, BA2-S2 (OUTROS)</strong></summary>
+
+```
+configure terminal
+spanning-tree vlan 10 priority 32768
+spanning-tree vlan 20 priority 32768
+spanning-tree vlan 50 priority 32768
+spanning-tree vlan 60 priority 32768
+spanning-tree vlan 70 priority 32768
+spanning-tree vlan 80 priority 32768
+spanning-tree vlan 90 priority 32768
+exit
+```
+</details> 
+
+## 8.1 EDIFICIO B 
+
+<details> 
+  <summary><strong>TODOS OS SWITCHES</strong></summary>
+
+```
+configure terminal
+spanning-tree vlan 11
+spanning-tree vlan 21
+spanning-tree vlan 30
+spanning-tree vlan 40
+spanning-tree vlan 61
+spanning-tree vlan 71
+spanning-tree vlan 81
+spanning-tree vlan 91
+exit
+```
+</details> 
+
+<details> 
+  <summary><strong>BB2-S6 (ROOT BRIDGE)</strong></summary>
+
+```
+configure terminal
+spanning-tree vlan 11 priority 0
+spanning-tree vlan 21 priority 0
+spanning-tree vlan 30 priority 0
+spanning-tree vlan 40 priority 0
+spanning-tree vlan 61 priority 0
+spanning-tree vlan 71 priority 0
+spanning-tree vlan 81 priority 0
+spanning-tree vlan 91 priority 0
+exit
+```
+</details> 
+
+<details> 
+  <summary><strong>BB1-S1 a S6, BB2-S1 a S5 (OUTROS)</strong></summary>
+
+```
+configure terminal
+spanning-tree vlan 11 priority 32768
+spanning-tree vlan 21 priority 32768
+spanning-tree vlan 30 priority 32768
+spanning-tree vlan 40 priority 32768
+spanning-tree vlan 61 priority 32768
+spanning-tree vlan 71 priority 32768
+spanning-tree vlan 81 priority 32768
+spanning-tree vlan 91 priority 32768
+exit
+```
+
+</details> 
 
 
