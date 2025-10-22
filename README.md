@@ -285,6 +285,8 @@ write mem
 
 ## 3.2 TRUNK PORTS
 
+Feito em Todas as Ligações Entre Switches
+
 ###  EDIFICIO A
 
 <details> 
@@ -433,6 +435,41 @@ exit
 </details> 
 
 
+## 3.2 ACCESS PORTS
+
+Feito em Todas as Portas que ligam aos Equipamnetos Terminais e No Swictch LAN-Datacenter nas ligações aos servidores
+
+<details> 
+  <summary><strong>ACCESS PORTS</strong></summary>
+  
+```
+------- ACCESS PORTS ------
+Interface <interface id>
+  switchport mode access
+  switchport access vlan <vlan id>
+exit
+
+```
+</details> 
+
+## 3.3 PORTS PARKING (VLAN_PARKING_LOT)
+
+Feito em Todas as Portas do Switch Inutilizadas (Adaptado ao Range necessário em cada Switch!)
+
+<details> 
+  <summary><strong>PORTS PARKING</strong></summary>
+  
+```
+------- PORTS PARKING ------
+interface range e0/0 - 3 , e1/0 - 3 , e2/0 - 3 , e3/0 - 3 , e4/0 - 3 , e5/0 - 3
+ switchport mode access
+ switchport access vlan 99
+exit
+
+show interfaces status
+```
+
+</details> 
 
 
 
