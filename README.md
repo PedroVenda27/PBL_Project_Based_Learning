@@ -1025,4 +1025,189 @@ exit
 
 </details> 
 
+# 9. Implementação de Port Security
+
+Deve Ser Feito em Todas as Interfaces em Modo Acesso
+
+<details> 
+  <summary><strong>PORT-SECURITY</strong></summary>
+
+```
+conf t
+interface range <interface id>
+ switchport port-security
+ switchport port-security maximum 1
+ switchport port-security violation shutdown
+ switchport port-security mac-address sticky
+exit
+```
+</details> 
+
+# 10. Segurança STP - (PORTFAST, BPDU GUARD, ROOT GUARD, LOOP GUARD)
+
+## Mecanismos de Proteção no Spanning Tree Protocol (STP)
+
+<details> 
+  <summary><strong>PORTFAST</strong></summary>
+
+
+**O que faz:**  
+PortFast é uma funcionalidade do Spanning Tree Protocol (STP) que permite que portas configuradas como "Access" (geralmente ligadas a dispositivos finais, como computadores ou impressoras) entrem diretamente no estado de "Forwarding". Isso reduz o tempo de espera para a porta começar a transmitir tráfego, evitando o atraso comum causado pela negociação do STP.
+
+```
+! Fazer nas Portas Access a equipamentos treminais
+
+spanning-tree portfast
+```
+</details>
+
+<details> 
+  <summary><strong>BPDU GUARD</strong></summary>
+
+**O que faz:**  
+O BPDU Guard é uma proteção contra dispositivos não autorizados que possam enviar BPDUs (Bridge Protocol Data Units) para portas configuradas com PortFast. Quando um BPDU é recebido em uma porta com BPDU Guard ativado, essa porta será colocada em estado de "errdisable" (desabilitada). Isso impede que switches ou outros dispositivos indesejados se conectem à rede e alterem a topologia da árvore de spanning.
+
+
+```
+! Fazer nas Portas Access a equipamentos treminais
+
+spanning-tree bpduguard enable
+```
+</details>
+
+<details> 
+  <summary><strong>ROOT GUARD</strong></summary>
+
+**O que faz:**  
+O Root Guard é usado para proteger a rede contra a promoção indesejada de um switch para o papel de root bridge (ponte raiz) no protocolo Spanning Tree. Quando ativado em uma porta Designated, o Root Guard impede que um BPDU indicando um root bridge diferente seja aceito. Se isso ocorrer, a porta é colocada em estado "errdisable" para proteger a topologia.
+
+
+```
+! Fazer nas Portas Designated
+
+spanning-tree guard root
+```
+</details>
+
+<details> 
+  <summary><strong>LOOP GUARD</strong></summary>
+
+**O que faz:**  
+O Loop Guard é uma proteção contra loops de rede. Ele é ativado nas portas que estão em estado "Blocked" ou "Alternate", que normalmente não deveriam encaminhar tráfego. Se uma dessas portas começar a enviar tráfego, o Loop Guard a coloca em estado de "errdisable", prevenindo a formação de loops na rede que possam causar degradação de desempenho ou falhas na comunicação.
+
+
+```
+! Fazer nas Portas Bloked/Alternate
+
+spanning-tree guard loop
+```
+</details>
+
+## PORT STATE (DESIGNATED, ROOT BRIDGE, BLOCK)
+
+<details> 
+  <summary><strong>EDIFICIO A</strong></summary>
+
+```
+------- BASTIDOR 1 ------
+
+-SW1
+    E0/0-3 designated (ROOT BRIDGE)
+-SW2
+    E0/0 root
+    E0/1-2 block - LOOP GUARD
+-SW3
+    E0/0 designated - ROOT GUARD
+    E0/1 root
+    E0/2 designated - ROOT GUARD
+    E1/2 designated - ROOT GUARD
+-SW4
+    E0/0 block - LOOP GUARD
+    E0/1 designated - ROOT GUARD
+    E0/2 root
+    E1/2 designated - ROOT GUARD
+ 
+------- BASTIDOR 2 ------
+
+-SW1
+    E0/0 designated - ROOT GUARD
+    E0/3 root
+-SW2
+    E0/0 block - LOOP GUARD
+    E1/0 root
+
+```
+
+</details>
+
+
+<details> 
+  <summary><strong>EDIFICIO B</strong></summary>
+
+```
+------- BASTIDOR 1 ------
+
+-SW1 
+    E0/0 designated - ROOT GUARD
+    E0/1 blocked    - LOOP GUARD
+    E0/2 root
+-SW2
+    E0/0 block - LOOP GUARD
+    E0/1 root
+	
+-SW3
+    E0/0 designated - ROOT GUARD
+    E0/1 root
+    E0/2 designated - ROOT GUARD
+-SW4
+    E0/0 block - LOOP GUARD
+    E0/1 designated - ROOT GUARD
+    E0/3 root
+
+-SW5
+    E0/0 designated - ROOT GUARD
+    E0/1 root
+    E0/2 designated - ROOT GUARD
+    E0/3 block - LOOP GUARD
+
+-SW6 
+	E0/1 designated - ROOT GUARD
+
+------- BASTIDOR 2  ------
+
+-SW1
+    E0/0 root
+    E0/1 designated - ROOT GUARD
+    E0/2 block - LOOP GUARD
+    E0/3 designated - ROOT GUARD
+
+-SW2
+    E0/0 designated - ROOT GUARD
+    E0/1 designated - ROOT GUARD
+    E0/2 root
+    E0/3 designated - ROOT GUARD
+
+-SW3
+    E0/0 block - LOOP GUARD
+    E0/1 root
+    E0/2 block - LOOP GUARD
+    E0/3 designated - ROOT GUARD
+
+-SW4 
+    E0/0 block - LOOP GUARD
+    E0/1 block - LOOP GUARD
+    E0/2 root
+
+-SW5
+    E0/0 designated - ROOT GUARD
+    E0/1 root
+    E0/2 designated - ROOT GUARD
+	E0/3 designated - ROOT GUARD
+
+-SW6
+    Todas en designated (ROOT BRIDGE) 
+```
+
+</details>
+
 
