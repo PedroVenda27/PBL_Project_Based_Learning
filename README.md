@@ -1236,6 +1236,7 @@ ip access-group GESTAO_B in
 
 <details> 
   <summary><strong>GESTAO</strong></summary>
+	
 ```
 permit udp any host 10.0.3.1 eq 67 ! DHCP
 permit ip 192.168.92.0 0.0.0.21 192.168.91.0 0.0.0.21
@@ -1243,8 +1244,11 @@ permit ip 192.168.92.0 0.0.0.21 192.168.90.0 0.0.0.21
 ```
 </details>
 
-### EDIFICIO A
-#### ALUNOS
+## EDIFICIO A
+
+<details> 
+  <summary><strong>ALUNOS</strong></summary>
+
 ```
 ip access-list extended ALUNOS_B
 permit tcp any host 192.168.93.3 eq 80 ! HTTP inst
@@ -1254,7 +1258,11 @@ permit udp any host 255.255.255.255 eq 67 ! DHCP
 permit ip 192.168.10.0 0.0.0.127 192.168.80.0 0.0.0.15 ! Impresoras
 permit ip 192.168.10.0 0.0.0.127 192.168.11.0 0.0.0.255 ! Interedificios
 ```
-#### PROFESORES
+</details>
+
+<details> 
+  <summary><strong>PROFESORES</strong></summary>
+	
 ```
 ip access-list extended PROFESORES_A
 permit tcp any host 192.168.93.3 eq 80 ! HTTP inst
@@ -1265,7 +1273,11 @@ permit tcp any host 192.168.93.4 eq 80 ! HTTP
 permit ip 192.168.20.0 0.0.0.15 192.168.80.0 0.0.0.15 ! Impresoras
 permit ip 192.168.20.0 0.0.0.15 192.168.21.0 0.0.0.63 ! Interedificios
 ```
-#### INFORMATICA
+</details>
+
+<details> 
+  <summary><strong>INFORMATICA</strong></summary>
+
 ```
 ip access-list extended INFORMATICA
 permit tcp any host 192.168.93.3 eq 80 ! HTTP inst
@@ -1276,7 +1288,11 @@ permit tcp any host 192.168.93.4 eq 80 ! HTTP
 permit ip 192.168.50.0 0.0.0.15 192.168.80.0 0.0.0.15 ! Impresoras
 permit tcp any host 192.168.93.5 eq 21 ! FTP
 ```
-#### CONVIDADOS
+</details>
+
+<details> 
+  <summary><strong>CONVIDADOS</strong></summary>
+	
 ```
 ip access-list extended CONVIDADOS_A
 permit tcp any host 192.168.94.1 eq 80 ! Internet 1
@@ -1284,29 +1300,47 @@ permit tcp any host 192.168.94.1 eq 443 ! Internet 2
 permit udp any host 192.168.60.1 eq 67 ! DHCP
 permit udp any host 255.255.255.255 eq 67 ! DHCP
 ```
-#### IMPRESORAS
+
+</details>
+
+<details> 
+  <summary><strong>IMPRESORAS</strong></summary>
+	
 ```
 ip access-list extended IMPRESORAS_A
 permit udp any host 192.168.80.1 eq 67 ! DHCP
 permit udp any host 255.255.255.255 eq 67 ! DHCP
 ```
-#### TELEFONES
+</details>
+
+<details> 
+  <summary><strong>TELEFONES</strong></summary>
+
 ```
 ip access-list extended TELEFONES_A
 permit udp any host 192.168.70.1 eq 67 ! DHCP
 permit udp any host 255.255.255.255 eq 67 ! DHCP
 permit ip 192.168.70.0 0.0.0.31 192.168.71.0 0.0.0.31 ! Interedificios
 ```
-#### GESTAO
+</details>
+
+<details> 
+  <summary><strong>GESTAO</strong></summary>
+
 ```
 permit udp any host 10.0.3.1 eq 67 ! DHCP
 permit ip 192.168.90.0 0.0.0.21 192.168.91.0 0.0.0.21
 permit ip 192.168.90.0 0.0.0.21 192.168.92.0 0.0.0.21 
 ```
+</details>
 
 
-### EDIFICIO B
-#### ALUNOS
+
+## EDIFICIO B
+
+<details> 
+  <summary><strong>ALUNOS</strong></summary>
+	
 ```
 ip access-list extended ALUNOS_B
 
@@ -1322,9 +1356,11 @@ permit ip 192.168.11.0 0.0.0.255 192.168.80.0 0.0.0.15 ! Impresoras
 
 permit ip 192.168.11.0 0.0.0.255 192.168.10.0 0.0.0.127 ! Interedificios
 ```
+</details> 
 
-
-#### PROFESORES
+<details> 
+  <summary><strong>PROFESORES</strong></summary>
+	
 ```
 ip access-list extended PROFESORES_B
 
@@ -1342,9 +1378,11 @@ permit ip 192.168.21.0 0.0.0.63 192.168.81.0 0.0.0.15 ! Impresoras
 
 permit ip 192.168.21.0 0.0.0.63 192.168.20.0 0.0.0.15 ! Interedificios
 ```
+</details>
 
-
-#### FINANCIEROS
+<details> 
+  <summary><strong>FINANCIEROS</strong></summary>
+	
 ```
 ip access-list extended FINANCIEROS
 
@@ -1358,9 +1396,12 @@ permit udp any host 255.255.255.255 eq 67 ! DHCP
 
 permit ip 192.168.30.0 0.0.0.15 192.168.81.0 0.0.0.15 ! Impresoras
 ```
+</details>
 
 
-#### ACADEMICOS
+<details> 
+  <summary><strong>ACADEMICOS</strong></summary>
+
 ```
 ip access-list extended ACADEMICOS
 
@@ -1376,7 +1417,12 @@ permit tcp any host 192.168.93.4 eq 80 ! HTTP
 
 permit ip 192.168.40.0 0.0.0.31 192.168.81.0 0.0.0.15 ! Impresoras
 ```
-#### CONVIDADOS
+</details>
+
+<details> 
+  <summary><strong>CONVIDADOS</strong></summary>
+
+
 ```
 ip access-list extended CONVIDADOS_B
 
@@ -1386,16 +1432,21 @@ permit tcp any host 192.168.94.1 eq 443 ! Internet 2
 
 permit udp any host 255.255.255.255 eq 67 ! DHCP
 ```
+</details>
 
-#### IMPRESORAS
+<details> 
+  <summary><strong>IMPRESORAS</strong></summary>
+
 ```
 ip access-list extended IMPRESORAS_B
 
 permit udp any host 255.255.255.255 eq 67 ! DHCP
 ```
+</details>
 
-
-#### TELEFONES
+<details> 
+  <summary><strong>TELEFONES</strong></summary>
+	
 ```
 ip access-list extended TELEFONES_B
 
@@ -1403,11 +1454,14 @@ permit udp any host 255.255.255.255 eq 67 ! DHCP
 
 permit ip 192.168.71.0 0.0.0.31 192.168.70.0 0.0.0.31 ! Interedificios
 ```
+</details>
 
-#### GESTAO
+<details> 
+  <summary><strong>GESTAO</strong></summary>
+	
 ```
 permit udp any host 10.0.3.1 eq 67 ! DHCP
 permit ip 192.168.91.0 0.0.0.21 192.168.90.0 0.0.0.21
 permit ip 192.168.91.0 0.0.0.21 192.168.92.0 0.0.0.21 
 ```
-
+</details>
