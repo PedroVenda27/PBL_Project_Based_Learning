@@ -17,7 +17,7 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
 
 # 1. Topologia física e lógica 
 
-<details>
+<details open>
   <summary><strong>1.1.1 DATACENTER</strong></summary>
 
   ### Serviços Internos
@@ -33,8 +33,7 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
 
 </details>
 
-
-<details>
+<details open>
   <summary><strong>1.1.2 EDIFÍCIO A</strong></summary>
 
   ### BASTIDOR 1
@@ -66,7 +65,8 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
    - 15 PCs para alunos
 </details>
 
-<details>
+
+<details open>
   <summary><strong>1.1.3 EDIFÍCIO B</strong></summary>
 
   ### BASTIDOR 1
@@ -112,11 +112,13 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
 </details>
 
 
+
+
 # 2. Endereçamento IPv4 
 
 ## SWITCHES
 
-<details>
+<details open>
   <summary><strong>SWITCHES – EDIFÍCIO A</strong></summary>
 
   | **Batidor** | **Switch** | **VLAN** | **Endereço IP**     | **Máscara**         | **Gateway**         |
@@ -129,7 +131,7 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
   | 2           | BA2-S6     | 90       | 192.168.90.22       | 255.255.255.224     | 192.168.90.1       |
 </details>
 
-<details>
+<details open>
   <summary><strong>SWITCHES – EDIFÍCIO B</strong></summary>
 
   | **Batidor** | **Switch** | **VLAN** | **Endereço IP**     | **Máscara**         | **Gateway**         |
@@ -149,7 +151,7 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
   | 2           | BB2-S7     | 91       | 192.168.91.27       | 255.255.255.224     | 192.168.91.1       |
 </details>
 
-<details>
+<details open>
   <summary><strong>SWITCHES – DATACENTER</strong></summary>
 
   | **Switch**           | **VLAN** | **Endereço IP**     | **Máscara**         | **Gateway**         |
@@ -159,7 +161,7 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
 
 ## ROUTERS
 
-<details>
+<details open>
   <summary><strong>ROUTERS</strong></summary>
 
   | **Router**          | **Interface** | **Endereço IP** |
@@ -179,7 +181,7 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
 
 ## VLANs
 
-<details>
+<details open>
   <summary><strong>VLANs</strong></summary>
 
   | **VLAN ID** | **Nome VLAN**            | **Segmento**         | **Local**       | **Nº Hosts** | **Nº Hosts Reais** | **CIDR** | **Sub-rede**         | **Gateway**        | **Máscara**         | **IPs utilizáveis** |
@@ -211,7 +213,7 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
 
 ## 3.1 CRIAR VLANS
 
-<details>
+<details open>
   <summary><strong>SWITCH EDIFÍCIO A</strong></summary>
 
   ```
@@ -237,7 +239,7 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
   ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>SWITCH EDIFÍCIO B</strong></summary>
 
 ``` 
@@ -266,7 +268,7 @@ write mem
 
 </details>
 
-<details> 
+<details open>
   <summary><strong>SWITCH DATACENTER</strong></summary>
 
 ``` 
@@ -289,7 +291,7 @@ Feito em Todas as Ligações Entre Switches
 
 ###  EDIFICIO A
 
-<details> 
+<details open>
   <summary><strong>BASTIDOR 1</strong></summary>
 
 ```
@@ -304,7 +306,7 @@ interface range ethernet0/0 - 2
 ```
 </details> 
 
-<details> 
+<details open>
   <summary><strong>BASTIDOR 2</strong></summary>
 
 ```
@@ -319,7 +321,7 @@ interface range ethernet0/0
 ```
 </details> 
 
-<details> 
+<details open>
   <summary><strong>ENTRE BASTIDORES</strong></summary>
 
 ```
@@ -355,7 +357,7 @@ interface range ethernet1/0
 
 ###  EDIFICIO B
 
-<details> 
+<details open>
   <summary><strong>BASTIDOR 1</strong></summary>
 
 ```
@@ -388,7 +390,7 @@ interface range ethernet0/0 - 1
 ```
 </details> 
 
-<details> 
+<details open>
   <summary><strong>BASTIDOR 2</strong></summary>
 
 ```
@@ -402,7 +404,7 @@ interface range ethernet0/0 - 2
 ```
 </details> 
 
-<details> 
+<details open>
   <summary><strong>ENTRE BASTIDORES</strong></summary>
 
 ```
@@ -420,7 +422,7 @@ interface range ethernet0/3
 
 ### DATABASE 
 
-<details> 
+<details open>
   <summary><strong>LAN DATACENTER</strong></summary>
 
 ```
@@ -439,7 +441,7 @@ exit
 
 Feito em Todas as Portas que ligam aos Equipamnetos Terminais e No Swictch LAN-Datacenter nas ligações aos servidores
 
-<details> 
+<details open>
   <summary><strong>ACCESS PORTS</strong></summary>
   
 ```
@@ -456,7 +458,7 @@ exit
 
 Feito em Todas as Portas do Switch Inutilizadas (Adaptado ao Range necessário em cada Switch!)
 
-<details> 
+<details open>
   <summary><strong>PORTS PARKING</strong></summary>
   
 ```
@@ -474,7 +476,7 @@ show interfaces status
 
 # 4. Static Routing 
 
-<details> 
+<details open>
   <summary><strong>ROUTER A</strong></summary>
 
 ```
@@ -486,7 +488,7 @@ exit
 ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>ROUTER B</strong></summary>
 
 ```
@@ -499,7 +501,7 @@ exit
 </details>
 
 
-<details> 
+<details open>
   <summary><strong>ROUTER CENTRAL</strong></summary>
 
 ```
@@ -529,7 +531,7 @@ exit
 </details>
 
 
-<details> 
+<details open> 
   <summary><strong>ROUTER DATACENTER</strong></summary>
 
 ```
@@ -542,7 +544,7 @@ exit
 </details>
 
 
-<details> 
+<details open>
   <summary><strong>ROUTER ISP</strong></summary>
 
 ```
@@ -558,7 +560,7 @@ exit
 
 # 5. Router On-a-Stick - Edifício A 
 
-<details> 
+<details open>
   <summary><strong>ROUTER A</strong></summary>
 
 ```bash
@@ -610,7 +612,7 @@ interface Ethernet0/0.90
 
 </details> 
 
-<details> 
+<details open>
   <summary><strong>ROUTER DATACENTER</strong></summary>
 
 ```
@@ -638,7 +640,7 @@ interface Ethernet0/1.92
 
 # 6. Legacy Inter-VLAN Routing 
 
-<details> 
+<details open> 
   <summary><strong>ROUTER B</strong></summary>
 
 ```
@@ -677,7 +679,7 @@ interface Ethernet2/2
 
 </details> 
 
-<details> 
+<details open>
   <summary><strong>SWITCH BB2-S6 </strong></summary>
 
 ```
@@ -730,7 +732,7 @@ end
 # 7. Servidor DHCP (Router Datacenter) 
 
 
-<details> 
+<details open>
   <summary><strong>ROUTER DATABASE</strong></summary>
   
 ```
@@ -851,7 +853,7 @@ exit
 </details> 
 
 
-<details> 
+<details open> 
   <summary><strong>ROUTER A (Relay)</strong></summary>
 
 ```
@@ -890,7 +892,7 @@ write memory
 
 </details> 
 
-<details> 
+<details open>
   <summary><strong>ROUTER B (Relay)</strong></summary>
 
  ```
@@ -907,7 +909,7 @@ exit
 
 ## 8.2 EDIFICIO A 
 
-<details> 
+<details open>
   <summary><strong>TODOS OS SWITCHES</strong></summary>
   
 ```
@@ -923,7 +925,7 @@ exit
 ```
 </details> 
 
-<details> 
+<details open>
   <summary><strong>BA1-S1 (ROOT BRIDGE)</strong></summary>
 
 ```
@@ -939,7 +941,7 @@ exit
 ```
 </details> 
 
-<details> 
+<details open>
   <summary><strong>BA1-S3 (ROOT SECONDARY)</strong></summary>
 
 ```
@@ -955,7 +957,7 @@ exit
 ```
 </details> 
 
-<details> 
+<details open>
   <summary><strong>BA1-S2, BA1-S4, BA2-S1, BA2-S2 (OUTROS)</strong></summary>
 
 ```
@@ -973,7 +975,7 @@ exit
 
 ## 8.1 EDIFICIO B 
 
-<details> 
+<details open>
   <summary><strong>TODOS OS SWITCHES</strong></summary>
 
 ```
@@ -990,7 +992,7 @@ exit
 ```
 </details> 
 
-<details> 
+<details open> 
   <summary><strong>BB2-S6 (ROOT BRIDGE)</strong></summary>
 
 ```
@@ -1007,7 +1009,7 @@ exit
 ```
 </details> 
 
-<details> 
+<details open> 
   <summary><strong>BB1-S1 a S6, BB2-S1 a S5 (OUTROS)</strong></summary>
 
 ```
@@ -1029,7 +1031,7 @@ exit
 
 Deve Ser Feito em Todas as Interfaces em Modo Acesso
 
-<details> 
+<details open> 
   <summary><strong>PORT-SECURITY</strong></summary>
 
 ```
@@ -1047,7 +1049,7 @@ exit
 
 ## Mecanismos de Proteção no Spanning Tree Protocol (STP)
 
-<details> 
+<details open> 
   <summary><strong>PORTFAST</strong></summary>
 
 
@@ -1061,7 +1063,7 @@ spanning-tree portfast
 ```
 </details>
 
-<details> 
+<details open> 
   <summary><strong>BPDU GUARD</strong></summary>
 
 **O que faz:**  
@@ -1075,7 +1077,7 @@ spanning-tree bpduguard enable
 ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>ROOT GUARD</strong></summary>
 
 **O que faz:**  
@@ -1089,7 +1091,7 @@ spanning-tree guard root
 ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>LOOP GUARD</strong></summary>
 
 **O que faz:**  
@@ -1105,7 +1107,7 @@ spanning-tree guard loop
 
 ## PORT STATE (DESIGNATED, ROOT BRIDGE, BLOCK)
 
-<details> 
+<details open>
   <summary><strong>EDIFICIO A</strong></summary>
 
 ```
@@ -1141,7 +1143,7 @@ spanning-tree guard loop
 </details>
 
 
-<details> 
+<details open> 
   <summary><strong>EDIFICIO B</strong></summary>
 
 ```
@@ -1217,24 +1219,32 @@ spanning-tree guard loop
 
 - Há uma ACL em cada VLAN do router dos edifícios, para distribuir o tráfego o mais segregado possível
 
-- No edifício A foi atribuido às subinterfaces
+- **No edifício A foi atribuido às subinterfaces**
 
+<details open>
+  <summary><strong>Exemplo</strong></summary>
+	
 ```
 interface e0/0.10
 ip access-group ALUNOS_A in
 ```
+</details> 
 
-- No edifício B, por ter a solução LEGACY, são aplicadas diretamente às interfaces
+- **No edifício B, por ter a solução LEGACY, são aplicadas diretamente às interfaces**
+
+<details open>
+  <summary><strong>Exemplo</strong></summary>
 
 ```
 interface e2/2
 ip access-group GESTAO_B in
 ```
+</details> 
 
 
 ## GENERAL
 
-<details> 
+<details open>
   <summary><strong>GESTAO</strong></summary>
 	
 ```
@@ -1246,7 +1256,7 @@ permit ip 192.168.92.0 0.0.0.21 192.168.90.0 0.0.0.21
 
 ## EDIFICIO A
 
-<details> 
+<details open> 
   <summary><strong>ALUNOS</strong></summary>
 
 ```
@@ -1260,7 +1270,7 @@ permit ip 192.168.10.0 0.0.0.127 192.168.11.0 0.0.0.255 ! Interedificios
 ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>PROFESORES</strong></summary>
 	
 ```
@@ -1275,7 +1285,7 @@ permit ip 192.168.20.0 0.0.0.15 192.168.21.0 0.0.0.63 ! Interedificios
 ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>INFORMATICA</strong></summary>
 
 ```
@@ -1290,7 +1300,7 @@ permit tcp any host 192.168.93.5 eq 21 ! FTP
 ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>CONVIDADOS</strong></summary>
 	
 ```
@@ -1303,7 +1313,7 @@ permit udp any host 255.255.255.255 eq 67 ! DHCP
 
 </details>
 
-<details> 
+<details open>
   <summary><strong>IMPRESORAS</strong></summary>
 	
 ```
@@ -1313,7 +1323,7 @@ permit udp any host 255.255.255.255 eq 67 ! DHCP
 ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>TELEFONES</strong></summary>
 
 ```
@@ -1324,7 +1334,7 @@ permit ip 192.168.70.0 0.0.0.31 192.168.71.0 0.0.0.31 ! Interedificios
 ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>GESTAO</strong></summary>
 
 ```
@@ -1338,7 +1348,7 @@ permit ip 192.168.90.0 0.0.0.21 192.168.92.0 0.0.0.21
 
 ## EDIFICIO B
 
-<details> 
+<details open>
   <summary><strong>ALUNOS</strong></summary>
 	
 ```
@@ -1358,7 +1368,7 @@ permit ip 192.168.11.0 0.0.0.255 192.168.10.0 0.0.0.127 ! Interedificios
 ```
 </details> 
 
-<details> 
+<details open>
   <summary><strong>PROFESORES</strong></summary>
 	
 ```
@@ -1380,7 +1390,7 @@ permit ip 192.168.21.0 0.0.0.63 192.168.20.0 0.0.0.15 ! Interedificios
 ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>FINANCIEROS</strong></summary>
 	
 ```
@@ -1399,7 +1409,7 @@ permit ip 192.168.30.0 0.0.0.15 192.168.81.0 0.0.0.15 ! Impresoras
 </details>
 
 
-<details> 
+<details open> 
   <summary><strong>ACADEMICOS</strong></summary>
 
 ```
@@ -1419,7 +1429,7 @@ permit ip 192.168.40.0 0.0.0.31 192.168.81.0 0.0.0.15 ! Impresoras
 ```
 </details>
 
-<details> 
+<details open> 
   <summary><strong>CONVIDADOS</strong></summary>
 
 
@@ -1434,7 +1444,7 @@ permit udp any host 255.255.255.255 eq 67 ! DHCP
 ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>IMPRESORAS</strong></summary>
 
 ```
@@ -1444,7 +1454,7 @@ permit udp any host 255.255.255.255 eq 67 ! DHCP
 ```
 </details>
 
-<details> 
+<details open> 
   <summary><strong>TELEFONES</strong></summary>
 	
 ```
@@ -1456,7 +1466,7 @@ permit ip 192.168.71.0 0.0.0.31 192.168.70.0 0.0.0.31 ! Interedificios
 ```
 </details>
 
-<details> 
+<details open>
   <summary><strong>GESTAO</strong></summary>
 	
 ```
