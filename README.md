@@ -416,6 +416,22 @@ interface range ethernet0/3
 </details> 
 
 
+### DATABASE 
+
+<details> 
+  <summary><strong>LAN DATACENTER</strong></summary>
+
+```
+------- LAN DATACENTER -------
+interface Et0/0
+ switchport trunk encapsulation dot1q     
+ switchport mode trunk
+ switchport trunk allowed vlan 92,93
+exit
+
+```
+</details> 
+
 
 
 
