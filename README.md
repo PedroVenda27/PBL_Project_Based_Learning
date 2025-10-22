@@ -472,5 +472,88 @@ show interfaces status
 </details> 
 
 
+# 4. Static Routing 
+
+<details> 
+  <summary><strong>ROUTER A</strong></summary>
+
+```
+------------ ROUTER A ------------
+
+conf t
+ip route 0.0.0.0 0.0.0.0 10.0.1.2
+exit
+```
+</details>
+
+<details> 
+  <summary><strong>ROUTER B</strong></summary>
+
+```
+------------ ROUTER B ------------
+
+conf t
+ip route 0.0.0.0 0.0.0.0 10.0.2.2
+exit
+```
+</details>
+
+
+<details> 
+  <summary><strong>ROUTER CENTRAL</strong></summary>
+
+```
+------------ ROUTER CENTRAL ------------
+
+conf t
+ip route 192.168.10.0 255.255.255.128 10.0.1.1
+ip route 192.168.11.0 255.255.255.0 10.0.2.1
+ip route 192.168.20.0 255.255.255.240 10.0.1.1
+ip route 192.168.21.0 255.255.255.192 10.0.2.1
+ip route 192.168.30.0 255.255.255.240 10.0.2.1
+ip route 192.168.40.0 255.255.255.224 10.0.2.1
+ip route 192.168.50.0 255.255.255.240 10.0.1.1
+ip route 192.168.60.0 255.255.255.248 10.0.1.1
+ip route 192.168.61.0 255.255.255.240 10.0.2.1
+ip route 192.168.70.0 255.255.255.224 10.0.1.1
+ip route 192.168.71.0 255.255.255.224 10.0.2.1
+ip route 192.168.80.0 255.255.255.240 10.0.1.1
+ip route 192.168.81.0 255.255.255.240 10.0.2.1
+ip route 192.168.90.0 255.255.255.224 10.0.1.1
+ip route 192.168.91.0 255.255.255.224 10.0.2.1
+ip route 192.168.92.0 255.255.255.224 10.0.3.1
+ip route 192.168.93.0 255.255.255.224 10.0.3.1
+ip route 192.168.94.0 255.255.255.248 10.0.4.1
+exit
+```
+</details>
+
+
+<details> 
+  <summary><strong>ROUTER DATACENTER</strong></summary>
+
+```
+------------ ROUTER DATACENTER ------------
+
+conf t
+ip route 0.0.0.0 0.0.0.0 10.0.3.2
+exit
+```
+</details>
+
+
+<details> 
+  <summary><strong>ROUTER ISP</strong></summary>
+
+```
+------------ ROUTER ISP ------------
+
+conf t
+ip route 0.0.0.0 0.0.0.0 10.0.4.2
+IP route 10.0.0.0 255.255.255.248 10.0.4.2
+exit
+```
+</details>
+
 
 
