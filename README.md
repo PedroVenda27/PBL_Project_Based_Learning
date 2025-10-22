@@ -15,7 +15,7 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
 
 # Desenvolvimento
 
-## 1. Topologia física e lógica 
+# 1. Topologia física e lógica 
 
 <details>
   <summary><strong>1.1.1 DATACENTER</strong></summary>
@@ -203,6 +203,218 @@ Aqui serão registados todos os passos do desenvolvimento do projeto, desde o en
   | 93          | DATACENTER               | Datacenter           | Datacenter      | 29           | 29                 | /27      | 192.168.93.0/27      | 192.168.93.1      | 255.255.255.224     | .2 – .30            |
   | 94          | ISP                      | ISP                  | Datacenter      | 29           | 29                 | /29      | 192.168.94.0/29      | 192.168.94.1      | 255.255.255.248     | .2 – .6             |
 </details>
+
+
+
+
+# 3. VLANs
+
+## 3.1 CRIAR VLANS
+
+<details>
+  <summary><strong>SWITCH EDIFÍCIO A</strong></summary>
+
+  ```
+  conf t
+  vlan 10
+   name ALUNOS_A
+  vlan 20
+   name PROFESSORES_A
+  vlan 50
+   name SERV_INFO
+  vlan 60
+   name CONVIDADOS_A
+  vlan 70
+   name TELEFONES_A
+  vlan 80
+   name IMPRESSORAS_A
+  vlan 90
+   name GESTAO_REDE_A
+  vlan 99
+   name PARKING_LOT
+  exit
+  write mem
+  ```
+</details>
+
+<details> 
+  <summary><strong>SWITCH EDIFÍCIO B</strong></summary>
+
+``` 
+conf t
+vlan 11
+ name ALUNOS_B
+vlan 21
+ name PROFESSORES_B
+vlan 30
+ name SERV_FINANCEIROS
+vlan 40
+ name SERV_ACADEMICOS
+vlan 61
+ name CONVIDADOS_B
+vlan 71
+ name TELEFONES_B
+vlan 81
+ name IMPRESSORAS_B
+vlan 91
+ name GESTAO_REDE_B
+vlan 99
+ name PARKING_LOT
+end
+write mem
+```
+
+</details>
+
+<details> 
+  <summary><strong>SWITCH DATACENTER</strong></summary>
+
+``` 
+conf t 
+vlan 92
+ name GESTAO_REDE_DATASET
+vlan 93
+ name DATACENTER
+vlan 99
+ name PARKING_LOT
+end
+write mem
+```
+
+</details>
+
+## 3.2 TRUNK PORTS
+
+###  EDIFICIO A
+
+<details> 
+  <summary><strong>BASTIDOR 1</strong></summary>
+
+```
+------------ BASTIDOR 1 ------------
+
+interface range ethernet0/0 - 2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 60
+ switchport trunk allowed vlan 10,20,50,60,70,80,90
+
+```
+</details> 
+
+<details> 
+  <summary><strong>BASTIDOR 2</strong></summary>
+
+```
+------------ BASTIDOR 2 ------------ 
+
+interface range ethernet0/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 60
+ switchport trunk allowed vlan 10,20,50,60,70,80,90
+
+```
+</details> 
+
+<details> 
+  <summary><strong>ENTRE BASTIDORES</strong></summary>
+
+```
+--------- ENTRE BASTIDORES ---------
+
+------ SWITCH BA1-S3 E BA1-S4 ------
+
+interface range ethernet1/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 60
+ switchport trunk allowed vlan 10,20,50,60,70,80,90
+
+----------- SWITCH BA2-S1 ------------
+
+interface range ethernet0/3
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 60
+ switchport trunk allowed vlan 10,20,50,60,70,80,90
+
+----------- SWITCH BA2-S2 ------------
+ 
+interface range ethernet1/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 60
+ switchport trunk allowed vlan 10,20,50,60,70,80,90
+
+```
+</details> 
+
+
+###  EDIFICIO B
+
+<details> 
+  <summary><strong>BASTIDOR 1</strong></summary>
+
+```
+------------ BASTIDOR 1 ------------
+
+------ SWITCH BB1-S1 E BB1-S3 ------
+
+interface range ethernet0/0 - 2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 61
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+
+ ---------- SWITCH BB1-S5 ----------
+
+interface range ethernet0/0 - 3 
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 61
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+
+ ------ SWITCH BB1-S2; BB1-S4; BB1-S6 ------
+
+interface range ethernet0/0 - 1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 61
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+
+```
+</details> 
+
+<details> 
+  <summary><strong>BASTIDOR 2</strong></summary>
+
+```
+------------ BASTIDOR 2 ------------
+ 
+interface range ethernet0/0 - 2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 61
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+```
+</details> 
+
+<details> 
+  <summary><strong>ENTRE BASTIDORES</strong></summary>
+
+```
+--------- ENTRE BASTIDORES ---------
+
+interface range ethernet0/3
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 61
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+
+```
+</details> 
+
 
 
 
