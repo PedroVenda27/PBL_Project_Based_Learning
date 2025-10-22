@@ -1211,3 +1211,203 @@ spanning-tree guard loop
 </details>
 
 
+# 11. ACL (Access Control List)
+
+- Todas as ACLs foram atribuídas com o recurso 'in', já que devido às especificações da rede, era a melhor maneira de evitar o tráfego indesejado, proibindo-o na origem e descarregando possíveis pacotes que saturam a rede.
+
+- Há uma ACL em cada VLAN do router dos edifícios, para distribuir o tráfego o mais segregado possível
+
+- No edifício A foi atribuido às subinterfaces
+
+```
+interface e0/0.10
+ip access-group ALUNOS_A in
+```
+
+- No edifício B, por ter a solução LEGACY, são aplicadas diretamente às interfaces
+
+```
+interface e2/2
+ip access-group GESTAO_B in
+```
+
+
+## GENERAL
+
+<details> 
+  <summary><strong>GESTAO</strong></summary>
+```
+permit udp any host 10.0.3.1 eq 67 ! DHCP
+permit ip 192.168.92.0 0.0.0.21 192.168.91.0 0.0.0.21
+permit ip 192.168.92.0 0.0.0.21 192.168.90.0 0.0.0.21 
+```
+</details>
+
+### EDIFICIO A
+#### ALUNOS
+```
+ip access-list extended ALUNOS_B
+permit tcp any host 192.168.93.3 eq 80 ! HTTP inst
+permit tcp any host 192.168.94.1 eq 80 ! Internet 1
+permit tcp any host 192.168.94.1 eq 443 ! Internet 2
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+permit ip 192.168.10.0 0.0.0.127 192.168.80.0 0.0.0.15 ! Impresoras
+permit ip 192.168.10.0 0.0.0.127 192.168.11.0 0.0.0.255 ! Interedificios
+```
+#### PROFESORES
+```
+ip access-list extended PROFESORES_A
+permit tcp any host 192.168.93.3 eq 80 ! HTTP inst
+permit tcp any host 192.168.94.1 eq 80 ! Internet 1
+permit tcp any host 192.168.94.1 eq 443 ! Internet 2
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+permit tcp any host 192.168.93.4 eq 80 ! HTTP
+permit ip 192.168.20.0 0.0.0.15 192.168.80.0 0.0.0.15 ! Impresoras
+permit ip 192.168.20.0 0.0.0.15 192.168.21.0 0.0.0.63 ! Interedificios
+```
+#### INFORMATICA
+```
+ip access-list extended INFORMATICA
+permit tcp any host 192.168.93.3 eq 80 ! HTTP inst
+permit tcp any host 192.168.94.1 eq 80 ! Internet 1
+permit tcp any host 192.168.94.1 eq 443 ! Internet 2
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+permit tcp any host 192.168.93.4 eq 80 ! HTTP
+permit ip 192.168.50.0 0.0.0.15 192.168.80.0 0.0.0.15 ! Impresoras
+permit tcp any host 192.168.93.5 eq 21 ! FTP
+```
+#### CONVIDADOS
+```
+ip access-list extended CONVIDADOS_A
+permit tcp any host 192.168.94.1 eq 80 ! Internet 1
+permit tcp any host 192.168.94.1 eq 443 ! Internet 2
+permit udp any host 192.168.60.1 eq 67 ! DHCP
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+```
+#### IMPRESORAS
+```
+ip access-list extended IMPRESORAS_A
+permit udp any host 192.168.80.1 eq 67 ! DHCP
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+```
+#### TELEFONES
+```
+ip access-list extended TELEFONES_A
+permit udp any host 192.168.70.1 eq 67 ! DHCP
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+permit ip 192.168.70.0 0.0.0.31 192.168.71.0 0.0.0.31 ! Interedificios
+```
+#### GESTAO
+```
+permit udp any host 10.0.3.1 eq 67 ! DHCP
+permit ip 192.168.90.0 0.0.0.21 192.168.91.0 0.0.0.21
+permit ip 192.168.90.0 0.0.0.21 192.168.92.0 0.0.0.21 
+```
+
+
+### EDIFICIO B
+#### ALUNOS
+```
+ip access-list extended ALUNOS_B
+
+permit tcp any host 192.168.93.3 eq 80 ! HTTP inst
+
+permit tcp any host 192.168.94.1 eq 80 ! Internet 1
+
+permit tcp any host 192.168.94.1 eq 443 ! Internet 2
+
+permit udp any host 192.168.11.1 eq 67 ! DHCP
+
+permit ip 192.168.11.0 0.0.0.255 192.168.80.0 0.0.0.15 ! Impresoras
+
+permit ip 192.168.11.0 0.0.0.255 192.168.10.0 0.0.0.127 ! Interedificios
+```
+
+
+#### PROFESORES
+```
+ip access-list extended PROFESORES_B
+
+permit tcp any host 192.168.93.3 eq 80 ! HTTP inst
+
+permit tcp any host 192.168.94.1 eq 80 ! Internet 1
+
+permit tcp any host 192.168.94.1 eq 443 ! Internet 2
+
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+
+permit tcp any host 192.168.93.4 eq 80 ! HTTP
+
+permit ip 192.168.21.0 0.0.0.63 192.168.81.0 0.0.0.15 ! Impresoras
+
+permit ip 192.168.21.0 0.0.0.63 192.168.20.0 0.0.0.15 ! Interedificios
+```
+
+
+#### FINANCIEROS
+```
+ip access-list extended FINANCIEROS
+
+permit tcp any host 192.168.93.3 eq 80 ! HTTP inst
+
+permit tcp any host 192.168.94.1 eq 80 ! Internet 1
+
+permit tcp any host 192.168.94.1 eq 443 ! Internet 2
+
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+
+permit ip 192.168.30.0 0.0.0.15 192.168.81.0 0.0.0.15 ! Impresoras
+```
+
+
+#### ACADEMICOS
+```
+ip access-list extended ACADEMICOS
+
+permit tcp any host 192.168.93.3 eq 80 ! HTTP inst
+
+permit tcp any host 192.168.94.1 eq 80 ! Internet 1
+
+permit tcp any host 192.168.94.1 eq 443 ! Internet 2
+
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+
+permit tcp any host 192.168.93.4 eq 80 ! HTTP
+
+permit ip 192.168.40.0 0.0.0.31 192.168.81.0 0.0.0.15 ! Impresoras
+```
+#### CONVIDADOS
+```
+ip access-list extended CONVIDADOS_B
+
+permit tcp any host 192.168.94.1 eq 80 ! Internet 1
+
+permit tcp any host 192.168.94.1 eq 443 ! Internet 2
+
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+```
+
+#### IMPRESORAS
+```
+ip access-list extended IMPRESORAS_B
+
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+```
+
+
+#### TELEFONES
+```
+ip access-list extended TELEFONES_B
+
+permit udp any host 255.255.255.255 eq 67 ! DHCP
+
+permit ip 192.168.71.0 0.0.0.31 192.168.70.0 0.0.0.31 ! Interedificios
+```
+
+#### GESTAO
+```
+permit udp any host 10.0.3.1 eq 67 ! DHCP
+permit ip 192.168.91.0 0.0.0.21 192.168.90.0 0.0.0.21
+permit ip 192.168.91.0 0.0.0.21 192.168.92.0 0.0.0.21 
+```
+
