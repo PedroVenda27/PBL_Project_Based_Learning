@@ -556,4 +556,84 @@ exit
 </details>
 
 
+# 5. Router on-a-stick - Edifício A (Router Datacenter)
+
+<details> 
+  <summary><strong>ROUTER A</strong></summary>
+
+```bash
+
+! Switch de Ligação colocar em trunk BA1-S1
+
+interface e0/3
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 60
+ switchport trunk allowed vlan 10,20,50,60,70,80,90
+ 
+ 
+! VLAN 10 - ALUNOS_A
+interface Ethernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.128
+
+! VLAN 20 - PROFESSORES_A
+interface Ethernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.240
+
+! VLAN 50 - SINFO
+interface Ethernet0/0.50
+ encapsulation dot1Q 50
+ ip address 192.168.50.1 255.255.255.240 ---
+
+! VLAN 60 - CONVIDADOS_A
+interface Ethernet0/0.60
+ encapsulation dot1Q 60 native
+ ip address 192.168.60.1 255.255.255.248 ---
+
+! VLAN 70 - TELEFONES_A
+interface Ethernet0/0.70
+ encapsulation dot1Q 70
+ ip address 192.168.70.1 255.255.255.224
+
+! VLAN 80 - IMPRESSORAS_A
+interface Ethernet0/0.80
+ encapsulation dot1Q 80
+ ip address 192.168.80.1 255.255.255.240
+
+! VLAN 90 - GESTÃO_REDE_A
+interface Ethernet0/0.90
+ encapsulation dot1Q 90
+ ip address 192.168.90.1 255.255.255.224
+```
+
+</details> 
+
+<details> 
+  <summary><strong>ROUTER DATACENTER</strong></summary>
+
+```
+
+! Switch de Ligação colocar em trunk LAN-Datacenter
+
+conf t
+interface Et0/0
+ switchport trunk encapsulation dot1q     
+ switchport mode trunk
+ switchport trunk allowed vlan 92,93
+exit
+
+interface Ethernet0/1.92
+ encapsulation dot1Q 92
+ ip address 192.168.92.1 255.255.255.224
+ 
+ interface Ethernet0/1.93
+ encapsulation dot1Q 93
+ ip address 192.168.93.1 255.255.255.248
+```
+
+</details>
+
+
 
