@@ -1,0 +1,8 @@
+
+
+conf t
+interface <interface id>
+ switchport nonegotiate
+
+
+

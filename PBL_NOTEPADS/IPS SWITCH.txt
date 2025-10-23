@@ -1,0 +1,179 @@
+! Configuração correta para múltiplos switches ou equipamentos diferentes.
+! Cada bloco abaixo pertence a um equipamento diferente que participa na VLAN 90.
+
+! Switch ou equipamento 1
+
+interface vlan 90
+ ip address 192.168.90.11 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.90.1
+
+! Switch ou equipamento 2
+interface vlan 90
+ ip address 192.168.90.12 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.90.1
+
+! Switch ou equipamento 3
+interface vlan 90
+ ip address 192.168.90.13 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.90.1
+
+! Switch ou equipamento 4
+interface vlan 90
+ ip address 192.168.90.14 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.90.1
+
+! Switch ou equipamento 5
+interface vlan 90
+ ip address 192.168.90.21 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.90.1
+
+! Switch ou equipamento 6
+interface vlan 90
+ ip address 192.168.90.22 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.90.1
+
+
+
+
+
+
+! Switch Datacenter
+interface vlan 92
+ ip address 192.168.92.2 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.92.1
+
+LAN-DATACENTER	92	192.168.92.2	255.255.255.224	192.168.92.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+! Switch ou equipamento 1
+interface vlan 91
+ ip address 192.168.91.11 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+! Switch ou equipamento 2
+interface vlan 91
+ ip address 192.168.91.12 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+! Switch ou equipamento 3
+interface vlan 91
+ ip address 192.168.91.13 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+! Switch ou equipamento 4
+interface vlan 91
+ ip address 192.168.91.14 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+! Switch ou equipamento 5
+interface vlan 91
+ ip address 192.168.91.15 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+! Switch ou equipamento 6
+interface vlan 91
+ ip address 192.168.91.16 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+interface vlan 91
+ ip address 192.168.91.21 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+interface vlan 91
+ ip address 192.168.91.22 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+interface vlan 91
+ ip address 192.168.91.23 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+interface vlan 91
+ ip address 192.168.91.24 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+interface vlan 91
+ ip address 192.168.91.25 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+interface vlan 91
+ ip address 192.168.91.26 255.255.255.224
+ no shutdown
+exit
+ip default-gateway 192.168.91.1
+
+
+interface vlan 92
+ ip address 192.168.92.2 255.255.255.224   
+ no shutdown
+exit
+
+ip route 0.0.0.0 0.0.0.0 192.168.92.1
+
+
+
+
+

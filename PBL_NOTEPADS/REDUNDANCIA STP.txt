@@ -1,0 +1,101 @@
+---------- EDIFICIO B ---------------
+
+---- TODOS OS SWITCHS ----
+
+configure terminal
+spanning-tree vlan 11
+spanning-tree vlan 21
+spanning-tree vlan 30
+spanning-tree vlan 40
+spanning-tree vlan 61
+spanning-tree vlan 71
+spanning-tree vlan 81
+spanning-tree vlan 91
+exit
+
+
+(BB2-S6) ROOT BRIDGE
+configure terminal
+spanning-tree vlan 11 priority 0
+spanning-tree vlan 21 priority 0
+spanning-tree vlan 30 priority 0
+spanning-tree vlan 40 priority 0
+spanning-tree vlan 61 priority 0
+spanning-tree vlan 71 priority 0
+spanning-tree vlan 81 priority 0
+spanning-tree vlan 91 priority 0
+exit
+
+
+(BB1-S1 a S6, BB2-S1 a S5 e S7) OUTROS
+configure terminal
+spanning-tree vlan 11 priority 32768
+spanning-tree vlan 21 priority 32768
+spanning-tree vlan 30 priority 32768
+spanning-tree vlan 40 priority 32768
+spanning-tree vlan 61 priority 32768
+spanning-tree vlan 71 priority 32768
+spanning-tree vlan 81 priority 32768
+spanning-tree vlan 91 priority 32768
+exit
+
+show spanning-tree vlan 11
+
+---------- EDIFICIO A ---------------
+
+
+
+TODOS OS SWITCHS
+
+configure terminal
+spanning-tree vlan 10
+spanning-tree vlan 20
+spanning-tree vlan 50
+spanning-tree vlan 60
+spanning-tree vlan 70
+spanning-tree vlan 80
+spanning-tree vlan 91
+exit
+
+
+(BA1-S1) ROOT BRIDGE
+configure terminal
+spanning-tree vlan 10 root primary
+spanning-tree vlan 20 root primary
+spanning-tree vlan 50 root primary
+spanning-tree vlan 60 root primary
+spanning-tree vlan 70 root primary
+spanning-tree vlan 80 root primary
+spanning-tree vlan 90 root primary
+exit
+
+
+
+
+
+(BA1-S3) – ROOT SECONDARY
+configure terminal
+spanning-tree vlan 10 root secondary
+spanning-tree vlan 20 root secondary
+spanning-tree vlan 50 root secondary
+spanning-tree vlan 60 root secondary
+spanning-tree vlan 70 root secondary
+spanning-tree vlan 80 root secondary
+spanning-tree vlan 90 root secondary
+exit
+
+
+(BA1-S2, BA1-S4, BA2-S1, BA2-S2) OUTROS
+configure terminal
+spanning-tree vlan 10 priority 32768
+spanning-tree vlan 20 priority 32768
+spanning-tree vlan 50 priority 32768
+spanning-tree vlan 60 priority 32768
+spanning-tree vlan 70 priority 32768
+spanning-tree vlan 80 priority 32768
+spanning-tree vlan 90 priority 32768
+exit
+
+
+
+show spanning-tree vlan 10

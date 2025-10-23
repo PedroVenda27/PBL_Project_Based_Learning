@@ -1,0 +1,56 @@
+
+
+
+conf t
+vlan 10
+ name ALUNOS_A
+vlan 20
+ name PROFESSORES_A
+vlan 50
+ name SERV_INFO
+vlan 60
+ name CONVIDADOS_A
+vlan 70
+ name TELEFONES_A
+vlan 80
+ name IMPRESSORAS_A
+vlan 90
+ name GESTAO_REDE_A
+vlan 99
+ name PARKING_LOT
+end
+write mem
+ 
+conf t
+vlan 11
+ name ALUNOS_B
+vlan 21
+ name PROFESSORES_B
+vlan 30
+ name SERV_FINANCEIROS
+vlan 40
+ name SERV_ACADEMICOS
+vlan 61
+ name CONVIDADOS_B
+vlan 71
+ name TELEFONES_B
+vlan 81
+ name IMPRESSORAS_B
+vlan 91
+ name GESTAO_REDE_B
+vlan 99
+ name PARKING_LOT
+end
+write mem
+ 
+conf t 
+vlan 92
+ name GESTAO_REDE_DATASET
+vlan 93
+ name DATACENTER
+vlan 99
+ name PARKING_LOT
+end
+write mem
+
+

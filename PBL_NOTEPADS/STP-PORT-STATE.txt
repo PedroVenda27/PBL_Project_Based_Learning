@@ -1,0 +1,97 @@
+EDIFICIO B
+ 
+BASTIDOR 1
+SW1 
+    E0/0 designated - ROOT GUARD
+    E0/1 blocked    - LOOP GUARD
+    E0/2 root
+SW2
+    E0/0 block - LOOP GUARD
+    E0/1 root
+	
+SW3
+    E0/0 designated - ROOT GUARD
+    E0/1 root
+    E0/2 designated - ROOT GUARD
+SW4
+    E0/0 block - LOOP GUARD
+    E0/1 designated - ROOT GUARD
+    E0/3 root
+
+SW5
+    E0/0 designated - ROOT GUARD
+    E0/1 root
+    E0/2 designated - ROOT GUARD
+    E0/3 block - LOOP GUARD
+SW6
+    E0/0 
+	E0/1 designated - ROOT GUARD
+    E0/3 root
+
+BASTIDOR 2
+SW1
+    E0/0 root
+    E0/1 designated - ROOT GUARD
+    E0/2 block - LOOP GUARD
+    E0/3 designated - ROOT GUARD
+SW2
+    E0/0 designated - ROOT GUARD
+    E0/1 designated - ROOT GUARD
+    E0/2 root
+    E0/3 designated - ROOT GUARD
+SW3
+    E0/0 block - LOOP GUARD
+    E0/1 root
+    E0/2 block - LOOP GUARD
+    E0/3 designated - ROOT GUARD
+SW4 
+    E0/0 block - LOOP GUARD
+    E0/1 block - LOOP GUARD
+    E0/2 root
+
+SW5
+    E0/0 designated - ROOT GUARD
+    E0/1 root
+    E0/2 designated - ROOT GUARD
+	E0/3 designated - ROOT GUARD
+SW6
+    Todas en designated (ROOT BRIDGE) 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+EDIFICIO A
+
+BASTIDOR 1
+SW1
+    E0/0-3 designated (ROOT BRIDGE)
+SW2
+    E0/0 root
+    E0/1-2 block - LOOP GUARD
+SW3
+    E0/0 designated - ROOT GUARD
+    E0/1 root
+    E0/2 designated - ROOT GUARD
+    E1/2 designated - ROOT GUARD
+SW4
+    E0/0 block - LOOP GUARD
+    E0/1 designated - ROOT GUARD
+    E0/2 root
+    E1/2 designated - ROOT GUARD
+	
+ 
+BASTIDOR 2
+SW1
+    E0/0 designated - ROOT GUARD
+    E0/3 root
+SW2
+     E0/0 block - LOOP GUARD
+    E1/0 root
+	
+	
+	

@@ -1,0 +1,36 @@
+! 1. ACL que define o tráfego interno a ser NATeado
+access-list 1 permit 10.0.0.0 0.255.255.255
+
+! 2. Interfaces da rede interna
+interface Ethernet0/0
+ description Ligacao ao Edifício A
+ ip nat inside
+ no shutdown
+exit
+
+interface Ethernet0/1
+ description Ligacao ao Edifício B
+ ip nat inside
+ no shutdown
+exit
+
+interface Ethernet0/2
+ description Ligacao ao Datacenter
+ ip nat inside
+ no shutdown
+exit
+
+! 3. Interface para a Internet (ligação ao ISP)
+interface Ethernet0/3
+ description Ligacao ao Router ISP
+ ip nat outside
+ no shutdown
+exit
+
+! 4. Aplicar NAT PAT (Overload)
+ip nat inside source list 1 interface Ethernet0/3 overload
+
+! 5. Rota default para encaminhar tráfego para a Internet
+ip route 0.0.0.0 0.0.0.0 192.168.94.1
+
+exit
