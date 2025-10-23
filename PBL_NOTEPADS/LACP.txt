@@ -1,0 +1,65 @@
+---------------LACP ------------------------
+
+
+
+------- BA2-S1--------------
+configure terminal
+
+# Configurar encapsulação para dot1q
+interface Ethernet0/0
+   switchport trunk encapsulation dot1q
+   switchport mode trunk
+   switchport trunk allowed vlan 10,20,50,60,70,80,90
+   channel-group 1 mode active
+exit
+
+interface Ethernet5/1
+   switchport trunk encapsulation dot1q
+   switchport mode trunk
+   switchport trunk allowed vlan 10,20,50,60,70,80,90
+   channel-group 1 mode active
+exit
+
+# Configuração do Port-Channel
+interface port-channel 1
+   switchport mode trunk
+   switchport trunk allowed vlan 10,20,50,60,70,80,90
+exit
+
+# Salvar as configurações
+write memory
+
+
+------- BA2-S2--------------
+configure terminal
+
+# Configurar encapsulação para dot1q
+interface Ethernet0/0
+   switchport trunk encapsulation dot1q
+   switchport mode trunk
+   switchport trunk allowed vlan 10,20,50,60,70,80,90
+   channel-group 1 mode active
+exit
+
+interface Ethernet5/1
+   switchport trunk encapsulation dot1q
+   switchport mode trunk
+   switchport trunk allowed vlan 10,20,50,60,70,80,90
+   channel-group 1 mode active
+exit
+
+# Configuração do Port-Channel
+interface port-channel 1
+   switchport mode trunk
+   switchport trunk allowed vlan 10,20,50,60,70,80,90
+exit
+ 
+# Salvar as configurações
+write memory
+
+
+
+
+
+
+show etherchannel summary

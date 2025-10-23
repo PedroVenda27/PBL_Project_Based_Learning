@@ -1,0 +1,25 @@
+
+------PORTFAST-------- PORTAS ACCESS
+conf t
+interface <id>
+spanning-tree portfast
+
+------BPDU GUARD-------- PORTAS ACCESS 
+conf t
+interface <id>
+spanning-tree bpduguard enable
+
+
+------ROOT GUARD-------- PORTAS DESIGNATED
+conf t
+interface <id>
+spanning-tree guard root 
+
+------LOOP guard-------- PORTAS BLOCKED/ALTERNATE
+conf t
+interface <id>
+spanning-tree guard loop 
+
+------Vizualizar Spanning Tree--------
+show spanning tree
+
