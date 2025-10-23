@@ -1484,7 +1484,7 @@ permit ip 192.168.91.0 0.0.0.21 192.168.92.0 0.0.0.21
 
 # EDIFICIO A
 
-<details open>
+<details>
   <summary><strong>BA1-S1</strong></summary>
 
 ```
@@ -2514,7 +2514,7 @@ end
 ```
 </details>
 
-<details open>
+<details>
   <summary><strong>BA2-S1</strong></summary>
 
 ```
@@ -2781,7 +2781,7 @@ end
 ```
 </details>
 
-<details open>
+<details>
   <summary><strong>BA2-S2</strong></summary>
 
 ```
@@ -3050,13 +3050,330 @@ end
 ```
 </details>
 
-<details open>
+<details>
   <summary><strong>EDF.A-R1</strong></summary>
+
+```
+DF.A-R1#show run
+Building configuration...
+
+Current configuration : 5226 bytes
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname EDF.A-R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+ip tcp synwait-time 5
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ no ip address
+ duplex auto
+!
+interface Ethernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.128
+ ip access-group ALUNOS_A in
+ ip helper-address 10.0.3.1
+!
+interface Ethernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.240
+ ip access-group PROFESORES_B in
+ ip helper-address 10.0.3.1
+!
+interface Ethernet0/0.50
+ encapsulation dot1Q 50
+ ip address 192.168.50.1 255.255.255.240
+ ip access-group INFORMATICA in
+ ip helper-address 10.0.3.1
+!
+interface Ethernet0/0.60
+ encapsulation dot1Q 60 native
+ ip address 192.168.60.1 255.255.255.248
+ ip access-group CONVIDADOS_A in
+ ip helper-address 10.0.3.1
+!
+interface Ethernet0/0.70
+ encapsulation dot1Q 70
+ ip address 192.168.70.1 255.255.255.224
+ ip access-group TELEFONES_A in
+ ip helper-address 10.0.3.1
+!
+interface Ethernet0/0.80
+ encapsulation dot1Q 80
+ ip address 192.168.80.1 255.255.255.240
+ ip access-group IMPRESORAS_A in
+ ip helper-address 10.0.3.1
+!
+interface Ethernet0/0.90
+ encapsulation dot1Q 90
+ ip address 192.168.90.1 255.255.255.224
+ ip access-group GESTAO_A in
+ ip helper-address 10.0.3.1
+!
+interface Ethernet0/1
+ ip address 10.0.1.1 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Serial4/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.0.1.2
+!
+ip access-list extended ALUNOS_A
+ permit tcp any host 192.168.93.3 eq www
+ permit tcp any host 192.168.94.1 eq www
+ permit tcp any host 192.168.94.1 eq 443
+ permit udp any host 255.255.255.255 eq bootps
+ permit ip 192.168.10.0 0.0.0.127 192.168.80.0 0.0.0.15
+ permit ip 192.168.10.0 0.0.0.127 192.168.11.0 0.0.0.255
+ip access-list extended CONVIDADOS_A
+ permit tcp any host 192.168.94.1 eq www
+ permit tcp any host 192.168.94.1 eq 443
+ permit udp any host 255.255.255.255 eq bootps
+ip access-list extended GESTAO_A
+ permit udp any host 10.0.3.1 eq bootps
+ permit ip 192.168.90.0 0.0.0.21 192.168.91.0 0.0.0.21
+ permit ip 192.168.90.0 0.0.0.21 192.168.92.0 0.0.0.21
+ip access-list extended IMPRESORAS_A
+ permit udp any host 255.255.255.255 eq bootps
+ip access-list extended INFORMATICA
+ permit tcp any host 192.168.93.3 eq www
+ permit tcp any host 192.168.94.1 eq www
+ permit tcp any host 192.168.94.1 eq 443
+ permit tcp any host 192.168.93.4 eq www
+ permit ip 192.168.50.0 0.0.0.15 192.168.80.0 0.0.0.15
+ permit tcp any host 192.168.93.5 eq ftp
+ permit udp any host 255.255.255.255 eq bootps
+ip access-list extended PROFESORES_A
+ permit tcp any host 192.168.93.3 eq www
+ permit tcp any host 192.168.94.1 eq www
+ permit tcp any host 192.168.94.1 eq 443
+ permit tcp any host 192.168.93.4 eq www
+ permit ip 192.168.20.0 0.0.0.15 192.168.80.0 0.0.0.15
+ permit ip 192.168.20.0 0.0.0.15 192.168.21.0 0.0.0.63
+ permit udp any host 255.255.255.255 eq bootps
+ip access-list extended TELEFONES_A
+ permit ip 192.168.70.0 0.0.0.31 192.168.71.0 0.0.0.31
+ permit udp any host 255.255.255.255 eq bootps
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+ transport input none
+!
+!
+end
+
+```
 </details>
 
 # EDIFICIO B
 
-<details open>
+<details>
   <summary><strong>BB1-S1</strong></summary>
 
 ```
@@ -3311,7 +3628,7 @@ end
 ```
 </details>
 
-<details open>
+<details>
   <summary><strong>BB1-S2</strong></summary>
 
 ```
@@ -3564,7 +3881,7 @@ end
 
 </details>
 
-<details open>
+<details>
   <summary><strong>BB1-S3</strong></summary>
 	
 ```
@@ -3813,7 +4130,7 @@ end
 
 </details>
 
-<details open>
+<details>
   <summary><strong>BB1-S4</strong></summary>
 
 ```
@@ -4072,7 +4389,7 @@ end
 ```
 </details>
 
-<details open>
+<details>
   <summary><strong>BB1-S5</strong></summary>
 
 ```
@@ -4323,7 +4640,7 @@ end
 ```
 </details>
 
-<details open>
+<details>
   <summary><strong>BB1-S6</strong></summary>
 
 ```
@@ -4576,7 +4893,7 @@ end
 </details>
 
 
-<details open>
+<details>
   <summary><strong>BB2-S1</strong></summary>
 	
 ```
@@ -4839,7 +5156,7 @@ end
 ```
 </details>
 
-<details open>
+<details>
   <summary><strong>BB2-S2</strong></summary>
 	
 ```
@@ -5090,7 +5407,7 @@ end
 ```	
 </details>
 
-<details open>
+<details>
   <summary><strong>BB2-S3</strong></summary>
 
 ```
@@ -5352,7 +5669,7 @@ end
 ```
 </details>
 
-<details open>
+<details>
   <summary><strong>BB2-S4</strong></summary>
 
 ```
@@ -5609,7 +5926,7 @@ end
 ```
 </details>
 
-<details open>
+<details>
   <summary><strong>BB2-S5</strong></summary>
 
 ```
@@ -5868,7 +6185,7 @@ end
 ```
 </details>
 
-<details open>
+<details>
   <summary><strong>BB2-S6</strong></summary>
 
 ```
@@ -6101,30 +6418,1424 @@ end
 ```
 </details>
 
-<details open>
-  <summary><strong>BB2-S7</strong></summary>
-</details>
-
-<details open>
+<details >
   <summary><strong>EDF.B-R1</strong></summary>
+
+```
+EDF.B-R1#show run
+Building configuration...
+
+Current configuration : 5102 bytes
+!
+! Last configuration change at 18:30:26 UTC Wed Oct 22 2025
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname EDF.B-R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+ip tcp synwait-time 5
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.0.2.1 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ ip address 192.168.11.1 255.255.255.0
+ ip access-group ALUNOS_B in
+ ip helper-address 10.0.3.1
+ duplex auto
+!
+interface Ethernet1/0
+ ip address 192.168.21.1 255.255.255.192
+ ip access-group PROFESORES_B in
+ ip helper-address 10.0.3.1
+ duplex auto
+!
+interface Ethernet1/1
+ ip address 192.168.30.1 255.255.255.240
+ ip access-group FINANCIEROS in
+ ip helper-address 10.0.3.1
+ duplex auto
+!
+interface Ethernet1/2
+ ip address 192.168.40.1 255.255.255.224
+ ip access-group ACADEMICOS in
+ ip helper-address 10.0.3.1
+ duplex auto
+!
+interface Ethernet1/3
+ ip address 192.168.61.1 255.255.255.248
+ ip access-group CONVIDADOS_B in
+ ip helper-address 10.0.3.1
+ duplex auto
+!
+interface Ethernet2/0
+ ip address 192.168.71.1 255.255.255.224
+ ip access-group TELEFONES_B in
+ ip helper-address 10.0.3.1
+ duplex auto
+!
+interface Ethernet2/1
+ ip address 192.168.81.1 255.255.255.248
+ ip access-group IMPRESORAS_B in
+ ip helper-address 10.0.3.1
+ duplex auto
+!
+interface Ethernet2/2
+ ip address 192.168.91.1 255.255.255.224
+ ip access-group GESTAO_B in
+ ip helper-address 10.0.3.1
+ duplex auto
+!
+interface Ethernet2/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Serial4/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.0.2.2
+!
+ip access-list extended ACADEMICOS
+ permit tcp any host 192.168.93.3 eq www
+ permit tcp any host 192.168.94.1 eq www
+ permit tcp any host 192.168.94.1 eq 443
+ permit udp any host 255.255.255.255 eq bootps
+ permit tcp any host 192.168.93.4 eq www
+ permit ip 192.168.40.0 0.0.0.31 192.168.81.0 0.0.0.15
+ip access-list extended ALUNOS_B
+ permit tcp any host 192.168.93.3 eq www
+ permit tcp any host 192.168.94.1 eq www
+ permit tcp any host 192.168.94.1 eq 443
+ permit ip 192.168.11.0 0.0.0.255 192.168.80.0 0.0.0.15
+ permit ip 192.168.11.0 0.0.0.255 192.168.10.0 0.0.0.127
+ permit udp any host 192.168.11.1 eq bootps
+ permit udp any host 255.255.255.255 eq bootps
+ip access-list extended CONVIDADOS_B
+ permit tcp any host 192.168.94.1 eq www
+ permit tcp any host 192.168.94.1 eq 443
+ permit udp any host 255.255.255.255 eq bootps
+ip access-list extended FINANCIEROS
+ permit tcp any host 192.168.93.3 eq www
+ permit tcp any host 192.168.94.1 eq www
+ permit tcp any host 192.168.94.1 eq 443
+ permit udp any host 255.255.255.255 eq bootps
+ permit ip 192.168.30.0 0.0.0.15 192.168.81.0 0.0.0.15
+ip access-list extended GESTAO_B
+ permit udp any host 255.255.255.255 eq bootps
+ permit ip 192.168.91.0 0.0.0.21 192.168.90.0 0.0.0.21
+ permit ip 192.168.91.0 0.0.0.21 192.168.92.0 0.0.0.21
+ip access-list extended IMPRESORAS_B
+ permit udp any host 255.255.255.255 eq bootps
+ip access-list extended PROFESORES_B
+ permit tcp any host 192.168.93.3 eq www
+ permit tcp any host 192.168.94.1 eq www
+ permit tcp any host 192.168.94.1 eq 443
+ permit udp any host 255.255.255.255 eq bootps
+ permit tcp any host 192.168.93.4 eq www
+ permit ip 192.168.21.0 0.0.0.63 192.168.81.0 0.0.0.15
+ permit ip 192.168.21.0 0.0.0.63 192.168.20.0 0.0.0.15
+ip access-list extended TELEFONES_B
+ permit udp any host 255.255.255.255 eq bootps
+ permit ip 192.168.71.0 0.0.0.31 192.168.70.0 0.0.0.31
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+ transport input none
+!
+!
+end
+
+```
 </details>
 
 # DATACENTER
 
-<details open>
+<details>
   <summary><strong>LAN-DATACENTER</strong></summary>
+
+````
+LAN-DATACENTER#show run
+Building configuration...
+
+Current configuration : 4992 bytes
+!
+! Last configuration change at 18:29:18 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname LAN-DATACENTER
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 92,93
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ spanning-tree guard root
+!
+interface Ethernet0/1
+ switchport access vlan 93
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0242.b0ae.9000
+ switchport port-security
+ spanning-tree guard loop
+!
+interface Ethernet0/2
+ switchport access vlan 93
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0242.f109.7100
+ switchport port-security
+ spanning-tree guard loop
+!
+interface Ethernet0/3
+ switchport access vlan 93
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0242.73bb.7000
+ switchport port-security
+ spanning-tree guard loop
+!
+interface Ethernet1/0
+ switchport access vlan 99
+ switchport mode access
+ shutdown
+!
+interface Ethernet1/1
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet1/2
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet1/3
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet2/0
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet2/1
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet2/2
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet2/3
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet3/0
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet3/1
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet3/2
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet3/3
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet4/0
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/2
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/3
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan92
+ ip address 192.168.92.2 255.255.255.224
+!
+ip default-gateway 192.168.92.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.92.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+````
 </details>
 
-<details open>
+<details>
   <summary><strong>R-DATACENTER</strong></summary>
+
+```
+R-DATACENTER#show run
+Building configuration...
+
+Current configuration : 5851 bytes
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R-DATACENTER
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+ip dhcp excluded-address 10.0.1.1 10.0.1.2
+ip dhcp excluded-address 10.0.2.1 10.0.2.2
+ip dhcp excluded-address 10.0.3.1 10.0.3.2
+ip dhcp excluded-address 10.0.4.1 10.0.4.2
+ip dhcp excluded-address 192.168.10.1
+ip dhcp excluded-address 192.168.11.1
+ip dhcp excluded-address 192.168.20.1
+ip dhcp excluded-address 192.168.21.1
+ip dhcp excluded-address 192.168.30.1
+ip dhcp excluded-address 192.168.40.1
+ip dhcp excluded-address 192.168.50.1
+ip dhcp excluded-address 192.168.60.1
+ip dhcp excluded-address 192.168.61.1
+ip dhcp excluded-address 192.168.70.1
+ip dhcp excluded-address 192.168.71.1
+ip dhcp excluded-address 192.168.80.1
+ip dhcp excluded-address 192.168.81.1
+ip dhcp excluded-address 192.168.90.1
+ip dhcp excluded-address 192.168.90.11 192.168.90.14
+ip dhcp excluded-address 192.168.90.21 192.168.90.22
+ip dhcp excluded-address 192.168.91.1
+ip dhcp excluded-address 192.168.91.11 192.168.91.16
+ip dhcp excluded-address 192.168.92.1
+ip dhcp excluded-address 192.168.91.21 192.168.91.27
+!
+ip dhcp pool POOL_ALUNOS_A
+ network 192.168.10.0 255.255.255.128
+ default-router 192.168.10.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_ALUNOS_B
+ network 192.168.11.0 255.255.255.0
+ default-router 192.168.11.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_PROF_A
+ network 192.168.20.0 255.255.255.240
+ default-router 192.168.20.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_PROF_B
+ network 192.168.21.0 255.255.255.192
+ default-router 192.168.21.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_FIN
+ network 192.168.30.0 255.255.255.240
+ default-router 192.168.30.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_ACA
+ network 192.168.40.0 255.255.255.224
+ default-router 192.168.40.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_SINFO
+ network 192.168.50.0 255.255.255.240
+ default-router 192.168.50.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_CONV_A
+ network 192.168.60.0 255.255.255.248
+ default-router 192.168.60.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_CONV_B
+ network 192.168.61.0 255.255.255.240
+ default-router 192.168.61.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_TEL_A
+ network 192.168.70.0 255.255.255.224
+ default-router 192.168.70.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_TEL_B
+ network 192.168.71.0 255.255.255.224
+ default-router 192.168.71.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_IMP_A
+ network 192.168.80.0 255.255.255.240
+ default-router 192.168.80.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_IMP_B
+ network 192.168.81.0 255.255.255.240
+ default-router 192.168.81.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_GEST_A
+ network 192.168.90.0 255.255.255.224
+ default-router 192.168.90.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_GEST_B
+ network 192.168.91.0 255.255.255.224
+ default-router 192.168.91.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool POOL_GEST_DATA
+ network 192.168.92.0 255.255.255.224
+ default-router 192.168.92.1
+ dns-server 8.8.8.8
+!
+!
+!
+no ip domain lookup
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+ip tcp synwait-time 5
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.0.3.1 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/0.92
+ ip access-group GESTAO_GENERAL in
+!
+interface Ethernet0/1
+ no ip address
+ duplex auto
+!
+interface Ethernet0/1.92
+ encapsulation dot1Q 92
+ ip address 192.168.92.1 255.255.255.224
+!
+interface Ethernet0/1.93
+ encapsulation dot1Q 93
+ ip address 192.168.93.1 255.255.255.248
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Serial4/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.0.3.2
+!
+ip access-list extended GESTAO_GENERAL
+ permit udp any host 10.0.3.1 eq bootps
+ permit ip 192.168.92.0 0.0.0.21 192.168.91.0 0.0.0.21
+ permit ip 192.168.92.0 0.0.0.21 192.168.90.0 0.0.0.21
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+ transport input none
+!
+!
+end
+
+```
 </details>
 
-<details open>
+<details>
   <summary><strong>R-CENTRAL</strong></summary>
+
+```
+R-CENTRAL#show run
+Building configuration...
+
+Current configuration : 3425 bytes
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R-CENTRAL
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+ip tcp synwait-time 5
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.0.1.2 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/1
+ ip address 10.0.2.2 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/2
+ ip address 10.0.3.2 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/3
+ ip address 10.0.4.2 255.255.255.252
+ duplex auto
+!
+interface Ethernet1/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Serial4/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 192.168.10.0 255.255.255.128 10.0.1.1
+ip route 192.168.11.0 255.255.255.0 10.0.2.1
+ip route 192.168.20.0 255.255.255.240 10.0.1.1
+ip route 192.168.21.0 255.255.255.192 10.0.2.1
+ip route 192.168.30.0 255.255.255.240 10.0.2.1
+ip route 192.168.40.0 255.255.255.224 10.0.2.1
+ip route 192.168.50.0 255.255.255.240 10.0.1.1
+ip route 192.168.60.0 255.255.255.248 10.0.1.1
+ip route 192.168.61.0 255.255.255.240 10.0.2.1
+ip route 192.168.70.0 255.255.255.224 10.0.1.1
+ip route 192.168.71.0 255.255.255.224 10.0.2.1
+ip route 192.168.80.0 255.255.255.240 10.0.1.1
+ip route 192.168.81.0 255.255.255.240 10.0.2.1
+ip route 192.168.90.0 255.255.255.224 10.0.1.1
+ip route 192.168.91.0 255.255.255.224 10.0.2.1
+ip route 192.168.92.0 255.255.255.224 10.0.3.1
+ip route 192.168.93.0 255.255.255.224 10.0.3.1
+ip route 192.168.94.0 255.255.255.248 10.0.4.1
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+ transport input none
+!
+!
+end
+```
 </details>
 
-<details open>
+<details>
   <summary><strong>R-ISP</strong></summary>
+
+```
+R-ISP#show run
+Building configuration...
+
+Current configuration : 2634 bytes
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R-ISP
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+ip tcp synwait-time 5
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.0.4.1 255.255.255.248
+ duplex auto
+!
+interface Ethernet0/1
+ ip address 192.168.94.1 255.255.255.248
+ duplex auto
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet2/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet3/3
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Serial4/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial4/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/0
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/1
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/2
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+interface Serial5/3
+ no ip address
+ shutdown
+ serial restart-delay 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.0.4.2
+ip route 10.0.0.0 255.255.255.248 10.0.4.2
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+ transport input none
+!
+!
+end
+
+```
 </details>
 
 
