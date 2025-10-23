@@ -2783,6 +2783,271 @@ end
 
 <details open>
   <summary><strong>BA2-S2</strong></summary>
+
+```
+BA2-S2#show run
+Building configuration...
+
+Current configuration : 5439 bytes
+!
+! Last configuration change at 18:29:16 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BA2-S2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ switchport trunk allowed vlan 10,20,50,60,70,80,90
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 60
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 10,20,50,60,70,80,90
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 60
+ switchport mode trunk
+ switchport nonegotiate
+ duplex full
+ channel-group 1 mode active
+ spanning-tree guard loop
+!
+interface Ethernet0/1
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.6806
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet0/2
+ switchport access vlan 20
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.680e
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet0/3
+ switchport access vlan 70
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.681b
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/0
+ switchport trunk allowed vlan 10,20,50,60,70,80,90
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 60
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet1/1
+ switchport access vlan 20
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/2
+ switchport access vlan 70
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/3
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport trunk allowed vlan 10,20,50,60,70,80,90
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface Ethernet5/2
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet5/3
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan90
+ ip address 192.168.90.22 255.255.255.224
+!
+ip default-gateway 192.168.90.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.90.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+
+```
 </details>
 
 <details open>
@@ -2793,51 +3058,3051 @@ end
 
 <details open>
   <summary><strong>BB1-S1</strong></summary>
+
+```
+BB1-S1#show run
+Building configuration...
+
+Current configuration : 5028 bytes
+!
+! Last configuration change at 18:29:09 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB1-S1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/1
+ switchport access vlan 99
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard loop
+!
+interface Ethernet0/2
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/3
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.6816
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/0
+ switchport access vlan 71
+ switchport mode access
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/1
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.11 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+
+```
 </details>
 
 <details open>
   <summary><strong>BB1-S2</strong></summary>
+
+```
+BB1-S2#show run
+Building configuration...
+
+Current configuration : 4997 bytes
+!
+! Last configuration change at 18:29:09 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB1-S2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard loop
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/2
+ switchport access vlan 11
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet0/3
+ switchport access vlan 11
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/0
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet1/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.12 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+```
+
 </details>
 
 <details open>
   <summary><strong>BB1-S3</strong></summary>
+	
+```
+BB1-S3#show run
+Building configuration...
+
+Current configuration : 4819 bytes
+!
+! Last configuration change at 18:29:08 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB1-S3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/2
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/0
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet1/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.13 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+```
+
 </details>
 
 <details open>
   <summary><strong>BB1-S4</strong></summary>
+
+```
+BB1-S4#show run
+Building configuration...
+
+Current configuration : 5251 bytes
+!
+! Last configuration change at 18:29:08 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB1-S4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard loop
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/2
+ switchport access vlan 21
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet0/3
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet1/0
+ switchport access vlan 21
+ switchport mode access
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/1
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.6812
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.6813
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.14 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+```
 </details>
 
 <details open>
   <summary><strong>BB1-S5</strong></summary>
+
+```
+BB1-S5#show run
+Building configuration...
+
+Current configuration : 4899 bytes
+!
+! Last configuration change at 18:29:09 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB1-S5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/2
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/3
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard loop
+!
+interface Ethernet1/0
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet1/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.15 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+
+```
 </details>
 
 <details open>
   <summary><strong>BB1-S6</strong></summary>
+
+```
+BB1-S6#show run
+Building configuration...
+
+Current configuration : 4948 bytes
+!
+! Last configuration change at 18:29:09 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB1-S6
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/2
+ switchport access vlan 11
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet0/3
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet1/0
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet1/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.16 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+
+```
 </details>
 
 
 <details open>
   <summary><strong>BB2-S1</strong></summary>
+	
+```
+BB2-S1#show run
+Building configuration...
+
+Current configuration : 5353 bytes
+!
+! Last configuration change at 18:29:09 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB2-S1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/2
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard loop
+!
+interface Ethernet0/3
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet1/0
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.6800
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/1
+ switchport access vlan 61
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.680b
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/2
+ switchport access vlan 81
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.6818
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/3
+ switchport access vlan 81
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 81
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 81
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 81
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 81
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 81
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/2
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Ethernet5/3
+ switchport access vlan 99
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.21 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+```
 </details>
 
 <details open>
   <summary><strong>BB2-S2</strong></summary>
+	
+```
+BB2-S2#show run
+Building configuration...
+
+Current configuration : 4928 bytes
+!
+! Last configuration change at 18:29:09 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB2-S2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/2
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/3
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet1/0
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.6803
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/1
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.6818
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/2
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/3
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 40
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 40
+ switchport mode access
+!
+interface Ethernet5/1
+ switchport access vlan 40
+ switchport mode access
+!
+interface Ethernet5/2
+ switchport access vlan 40
+ switchport mode access
+!
+interface Ethernet5/3
+ switchport access vlan 40
+ switchport mode access
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.22 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+	
+```	
 </details>
 
 <details open>
   <summary><strong>BB2-S3</strong></summary>
+
+```
+BB2-S3#show run
+Building configuration...
+
+Current configuration : 5333 bytes
+!
+! Last configuration change at 18:29:20 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB2-S3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard loop
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/2
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard loop
+!
+interface Ethernet0/3
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet1/0
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.681f
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/1
+ switchport access vlan 61
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.680e
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/2
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.6802
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/3
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 61
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 61
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 61
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/2
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/3
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.23 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+
+```
 </details>
 
 <details open>
   <summary><strong>BB2-S4</strong></summary>
+
+```
+BB2-S4#show run
+Building configuration...
+
+Current configuration : 5122 bytes
+!
+! Last configuration change at 18:29:09 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB2-S4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard loop
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard loop
+!
+interface Ethernet0/2
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/3
+ switchport access vlan 21
+ switchport mode access
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.680f
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/1
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.680a
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/2
+ switchport access vlan 21
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.24 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+
+```
 </details>
 
 <details open>
   <summary><strong>BB2-S5</strong></summary>
+
+```
+BB2-S5#show run
+Building configuration...
+
+Current configuration : 5212 bytes
+!
+! Last configuration change at 18:29:12 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB2-S5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/2
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet0/3
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+ spanning-tree guard root
+!
+interface Ethernet1/0
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.6811
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/1
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security mac-address sticky 0050.7966.681a
+ switchport port-security
+ spanning-tree portfast edge
+ spanning-tree bpduguard enable
+!
+interface Ethernet1/2
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet1/3
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/0
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/1
+ switchport access vlan 71
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/2
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet2/3
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/0
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/1
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/2
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet3/3
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/0
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/1
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/2
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet4/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/0
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/1
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/2
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Ethernet5/3
+ switchport access vlan 11
+ switchport mode access
+ switchport port-security mac-address sticky
+ switchport port-security
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan91
+ ip address 192.168.91.25 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+
+```
 </details>
 
 <details open>
   <summary><strong>BB2-S6</strong></summary>
+
+```
+BB2-S6#show run
+Building configuration...
+
+Current configuration : 3791 bytes
+!
+! Last configuration change at 18:29:09 UTC Wed Oct 22 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname BB2-S6
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging discriminator EXCESS severity drops 6 msg-body drops EXCESSCOLL
+logging buffered 50000
+logging console discriminator EXCESS
+!
+no aaa new-model
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+spanning-tree vlan 11,21,30,40,61,71,81,91 priority 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/1
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/2
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet0/3
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet1/0
+ switchport access vlan 21
+ switchport mode access
+!
+interface Ethernet1/1
+ switchport access vlan 30
+ switchport mode access
+!
+interface Ethernet1/2
+ switchport access vlan 40
+ switchport mode access
+!
+interface Ethernet1/3
+ switchport access vlan 61
+ switchport mode access
+!
+interface Ethernet2/0
+ switchport access vlan 71
+ switchport mode access
+!
+interface Ethernet2/1
+ switchport access vlan 81
+ switchport mode access
+!
+interface Ethernet2/2
+ switchport access vlan 91
+ switchport mode access
+!
+interface Ethernet2/3
+ switchport access vlan 99
+ switchport trunk allowed vlan 11,21,30,40,50,61,71,81,91
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 61
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface Ethernet3/0
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet3/1
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet3/2
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet3/3
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet4/0
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet4/1
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet4/2
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet4/3
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet5/0
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet5/1
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet5/2
+ switchport access vlan 11
+ switchport mode access
+!
+interface Ethernet5/3
+ switchport access vlan 11
+ switchport mode access
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan11
+ no ip address
+!
+interface Vlan21
+ no ip address
+!
+interface Vlan30
+ no ip address
+!
+interface Vlan40
+ no ip address
+!
+interface Vlan61
+ no ip address
+!
+interface Vlan71
+ no ip address
+!
+interface Vlan81
+ no ip address
+!
+interface Vlan91
+ ip address 192.168.91.26 255.255.255.224
+!
+ip default-gateway 192.168.91.1
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.91.1
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+!
+!
+!
+end
+
+```
+</details>
+
+<details open>
+  <summary><strong>BB2-S7</strong></summary>
 </details>
 
 <details open>
