@@ -1,0 +1,20 @@
+uBridge version 0.9.19 running with libpcap version 1.9.1 (with TPACKET_V3)
+Hypervisor TCP control server started (IP 0.0.0.0 port 42847).
+UDP tunnel connecting from local port 20025 to IPv4 address 127.0.0.1 on port 20024
+UDP tunnel connecting from local port 20082 to IPv4 address 127.0.0.1 on port 20083
+UDP tunnel connecting from local port 20084 to IPv4 address 127.0.0.1 on port 20085
+UDP tunnel connecting from local port 20086 to IPv4 address 127.0.0.1 on port 20087
+UDP tunnel connecting from local port 20091 to IPv4 address 127.0.0.1 on port 20090
+UDP tunnel connecting from local port 20161 to IPv4 address 127.0.0.1 on port 20160
+Listener thread for IOL instance 16 on port 0/2 has started
+Listener thread for IOL instance 16 on port 5/1 has started
+Listener thread for IOL instance 16 on port 0/1 has started
+Listener thread for IOL instance 16 on port 1/0 has started
+Listener thread for IOL instance 16 on port 0/3 has started
+Listener thread for IOL instance 16 on port 0/0 has started
+IOL bridge listener thread for IOL-BRIDGE-528 with ID 528 has started
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused

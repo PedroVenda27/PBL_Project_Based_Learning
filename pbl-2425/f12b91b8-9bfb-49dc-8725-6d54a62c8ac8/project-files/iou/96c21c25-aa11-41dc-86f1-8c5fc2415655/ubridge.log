@@ -1,0 +1,60 @@
+uBridge version 0.9.19 running with libpcap version 1.9.1 (with TPACKET_V3)
+Hypervisor TCP control server started (IP 0.0.0.0 port 33265).
+UDP tunnel connecting from local port 20015 to IPv4 address 127.0.0.1 on port 20014
+UDP tunnel connecting from local port 20019 to IPv4 address 127.0.0.1 on port 20018
+UDP tunnel connecting from local port 20127 to IPv4 address 127.0.0.1 on port 20126
+UDP tunnel connecting from local port 20133 to IPv4 address 127.0.0.1 on port 20132
+UDP tunnel connecting from local port 20107 to IPv4 address 127.0.0.1 on port 20106
+UDP tunnel connecting from local port 20112 to IPv4 address 127.0.0.1 on port 20113
+Listener thread for IOL instance 9 on port 0/0 has started
+IOL bridge listener thread for IOL-BRIDGE-521 with ID 521 has started
+Listener thread for IOL instance 9 on port 1/0 has started
+Listener thread for IOL instance 9 on port 0/1 has started
+Listener thread for IOL instance 9 on port 0/3 has started
+Listener thread for IOL instance 9 on port 1/1 has started
+Listener thread for IOL instance 9 on port 0/2 has started
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused
+recv: Connection refused

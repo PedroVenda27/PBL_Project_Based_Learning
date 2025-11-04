@@ -1,0 +1,3 @@
+uBridge version 0.9.19 running with libpcap version 1.9.1 (with TPACKET_V3)
+Hypervisor TCP control server started (IP 0.0.0.0 port 40559).
+IOL bridge listener thread for IOL-BRIDGE-537 with ID 537 has started
