@@ -1,9 +1,0 @@
-uBridge version 0.9.19 running with libpcap version 1.9.1 (with TPACKET_V3)
-Hypervisor TCP control server started (IP 0.0.0.0 port 36417).
-UDP tunnel connecting from local port 20003 to IPv4 address 127.0.0.1 on port 20002
-UDP tunnel connecting from local port 20008 to IPv4 address 127.0.0.1 on port 20009
-UDP tunnel connecting from local port 20037 to IPv4 address 127.0.0.1 on port 20036
-IOL bridge listener thread for IOL-BRIDGE-515 with ID 515 has started
-Listener thread for IOL instance 3 on port 0/0 has started
-Listener thread for IOL instance 3 on port 0/1 has started
-Listener thread for IOL instance 3 on port 0/2 has started

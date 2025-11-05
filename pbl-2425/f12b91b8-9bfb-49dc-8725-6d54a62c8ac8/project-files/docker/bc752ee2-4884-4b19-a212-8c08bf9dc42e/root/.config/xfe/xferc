@@ -1,5 +1,0 @@
-[OPTIONS]
-root_warn=0
-
-[PROGS]
-xterm=x-terminal-emulator
